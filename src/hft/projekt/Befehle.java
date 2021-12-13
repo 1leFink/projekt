@@ -81,6 +81,7 @@ public class Befehle {
 		}
 
 	//test
+		//Change
 	}
 	
 	public static void addKunde(String[] parameter) {

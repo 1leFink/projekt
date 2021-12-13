@@ -6,13 +6,7 @@ public class Projekt{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		
-	
-		
 		run();
-		
-		
 	}
 
 	public static void run() {
