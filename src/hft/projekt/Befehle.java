@@ -80,7 +80,7 @@ public class Befehle {
 			System.out.println("bitte versuchen sie es erneut");
 		}
 
-	
+	//test
 	}
 	
 	public static void addKunde(String[] parameter) {
