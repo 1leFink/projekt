@@ -64,7 +64,7 @@ public class Befehle {
 	
 		Projekt.run();
 	}
-	
+	//s
 	public static void infoKunde(String[] parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde;
