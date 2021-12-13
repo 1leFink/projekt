@@ -20,7 +20,7 @@ public class Projekt{
 		
 		Befehle.befehlEinlesen();
 		
-		//awda
+		//awdaw
 	
 	}
 	
