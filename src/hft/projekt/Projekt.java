@@ -19,8 +19,6 @@ public class Projekt{
 		}
 		
 		Befehle.befehlEinlesen();
-		
-		//awdaw
 	
 	}
 	

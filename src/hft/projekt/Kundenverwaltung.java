@@ -39,6 +39,24 @@ public class Kundenverwaltung implements Serializable{
 		}
 	}
 	
+public void kundeEntfernen(String kundenname) {
+		
+		boolean found = false;
+		for(Kunde k : kunden.values()) {
+			if(k.getName().equals(kundenname)) {
+				kunden.remove(k.getKundennr());
+				found = true;
+				
+			}
+		
+		}
+		if(found == false) {
+			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
+		}
+	}
+	
+
+	
 	public Kunde getKundeByNr(int nr) {
 		boolean found = false;
 		for(int i : kunden.keySet()) {

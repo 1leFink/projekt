@@ -47,7 +47,6 @@ public class Speicherverwaltung implements Serializable{
 	public static void saveKundenverwaltung(Kundenverwaltung m) {
 		
 		
-		
 		try {
 			FileOutputStream fOut = new FileOutputStream(path);
 			ObjectOutputStream objOut = new ObjectOutputStream(fOut);

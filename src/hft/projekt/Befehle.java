@@ -46,8 +46,7 @@ public class Befehle {
 		}
 		befehl = b[0];
 		
-
-		
+		System.out.println("DEBUG: " + befehl);
 		
 		switch(befehl) {
 			case "infoKunde":
@@ -55,6 +54,9 @@ public class Befehle {
 				break;
 			case "addKunde":
 				addKunde(param);
+				break;
+			case "rmKunde":
+				rmKunde(param);
 				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
@@ -91,6 +93,35 @@ public class Befehle {
 		Speicherverwaltung.saveKundenverwaltung(k);
 		
 		
+		
+	}
+	
+	public static void rmKunde(String[] parameter) {
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		Scanner sc = new Scanner(System.in);
+		
+		try {
+			Integer.parseInt(parameter[0]);
+			Kunde kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
+			
+			System.out.println("Kunde "  + kunde.getName() + " wirklich löschen? y/n");
+			if(sc.next().equals("y")) {
+				k.kundeEntfernen(Integer.valueOf(parameter[0]));
+				System.out.println("Kunde wurde entfernt. \n");
+			}
+		
+		}
+		catch(Exception e) {
+			Kunde kunde = k.getKundeByName(parameter[0]);
+			System.out.println("Kunde "  + kunde.getName() + " wirklich löschen? y/n");
+			if(sc.next().equals("y")) {
+				k.kundeEntfernen(parameter[0]);
+				System.out.println("Kunde wurde entfernt. \n");
+			}
+			
+		}
+		
+		Speicherverwaltung.saveKundenverwaltung(k);
 		
 	}
 	
