@@ -46,10 +46,10 @@ public class Befehle {
 		}
 		befehl = b[0];
 		
-		if(param.length == 0) {
-			System.out.println("Bitte geben sie einen Parameter mit an");
-			Projekt.run();
-		}
+//		if(param.length == 0) {
+//			System.out.println("Bitte geben sie einen Parameter mit an");
+//			Projekt.run();
+//		}
 		
 		System.out.println("DEBUG: " + befehl);
 		
@@ -63,8 +63,12 @@ public class Befehle {
 			case "rmKunde":
 				rmKunde(param);
 				break;
+			case "listKunden":
+				listKunden();
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
+				
 		}
 	
 		Projekt.run();
@@ -78,7 +82,7 @@ public class Befehle {
 			Integer.parseInt(parameter[0]);
 			kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
 		}catch(Exception e){
-			//infoKunde wurde ein Namen übergeben
+			//infoKunde wurde ein Namen ï¿½bergeben
 			 kunde = k.getKundeByName(parameter[0]);
 		}
 		
@@ -109,7 +113,7 @@ public class Befehle {
 			Integer.parseInt(parameter[0]);
 			Kunde kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
 			
-			System.out.println("Kunde "  + kunde.getName() + " wirklich löschen? y/n");
+			System.out.println("Kunde "  + kunde.getName() + " wirklich lï¿½schen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(Integer.valueOf(parameter[0]));
 				System.out.println("Kunde wurde entfernt. \n");
@@ -118,7 +122,7 @@ public class Befehle {
 		}
 		catch(Exception e) {
 			Kunde kunde = k.getKundeByName(parameter[0]);
-			System.out.println("Kunde "  + kunde.getName() + " wirklich löschen? y/n");
+			System.out.println("Kunde "  + kunde.getName() + " wirklich lï¿½schen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(parameter[0]);
 				System.out.println("Kunde wurde entfernt. \n");
@@ -130,4 +134,9 @@ public class Befehle {
 		
 	}
 	
+	public static void listKunden() {
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		k.listKunden();
+		
+	}
 }

@@ -84,8 +84,17 @@ public void kundeEntfernen(String kundenname) {
 		return null;
 	}
 
-	
-	
+	public void listKunden() {
+		System.out.println("-------------Kunden--------------");
+		System.out.printf("%-10s%-10s%-10s%n%n", "Name", "Nr.", "Beitrittsdatum");
+		for(Kunde k : kunden.values()) {
+			
+			System.out.printf("%-10s%-10s%-10s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
+			
+			
+		}
+		System.out.println("----------------------------------");
+	}
 	
 	
 }

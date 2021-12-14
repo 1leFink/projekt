@@ -40,8 +40,12 @@ public class Kunde implements Serializable{
 	public void setAuftraege(HashMap<Integer, Auftrag> auftraege) {
 		this.auftraege = auftraege;
 	}
-	
-	
+	public LocalDate getBeitrittsdatum() {
+		return beitrittsdatum;
+	}
+	public void setBeitrittsdatum(LocalDate beitrittsdatum) {
+		this.beitrittsdatum = beitrittsdatum;
+	}
 	public void displayInfo() {
 		String padded1 = String.format("%1$-20s", "Name:");
 		String padded2 = String.format("%1$-20s", "Kundennummer:");
