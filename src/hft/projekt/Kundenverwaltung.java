@@ -5,11 +5,6 @@ import java.util.HashMap;
 
 public class Kundenverwaltung implements Serializable{
 
-	/**
-	 * 
-	 */
-
-	
 	private static final long serialVersionUID = 1L;
 	
 	private HashMap<Integer, Kunde> kunden;
@@ -17,6 +12,10 @@ public class Kundenverwaltung implements Serializable{
 	
 	public Kundenverwaltung() {
 		this.kunden = new HashMap<Integer, Kunde>();
+	}
+	
+	public HashMap<Integer, Kunde> getKunden() {
+		return kunden;
 	}
 	
 	
@@ -85,9 +84,7 @@ public void kundeEntfernen(String kundenname) {
 		return null;
 	}
 
-	public HashMap<Integer, Kunde> getKunden() {
-		return kunden;
-	}
+	
 	
 	
 	

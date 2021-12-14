@@ -52,8 +52,7 @@ public class Kunde implements Serializable{
 		Random rand = new Random();
 		int[] ziffern = {0,1,2,3,4,5,6,7,8,9};
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		String num  = "";
-		boolean flag = true;
+		String num = "";
 		boolean duplicate = false;
 	
 		
@@ -64,6 +63,8 @@ public class Kunde implements Serializable{
 			int index = rand.nextInt(10);
 			num = num +""+ ziffern[index];
 		}
+		
+		//num ="48585";
 		
 		for(int i : k.getKunden().keySet()) {
 			if(i == Integer.valueOf(num)) {

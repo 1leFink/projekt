@@ -16,10 +16,10 @@ public class Befehle {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.print(">>>");
+		System.out.print("Allah: ");
 		
 		/*
-		 * Ein befehl besteht aus dem Befehlsnamen und der richtigen Anzhal an Parametern.
+		 * Ein befehl besteht aus dem Befehlsnamen und der richtigen Anzahl an Parametern.
 		 * Beispiele:
 		 * 
 		 * infoKunde (kundennummer/name) 
@@ -46,6 +46,11 @@ public class Befehle {
 		}
 		befehl = b[0];
 		
+		if(param.length == 0) {
+			System.out.println("Bitte geben sie einen Parameter mit an");
+			Projekt.run();
+		}
+		
 		System.out.println("DEBUG: " + befehl);
 		
 		switch(befehl) {
@@ -68,9 +73,10 @@ public class Befehle {
 	public static void infoKunde(String[] parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde;
+		
 		try {
 			Integer.parseInt(parameter[0]);
-			 kunde = k.getKundeByNr(Integer.valueOf(0));
+			kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
 		}catch(Exception e){
 			//infoKunde wurde ein Namen übergeben
 			 kunde = k.getKundeByName(parameter[0]);
@@ -82,8 +88,7 @@ public class Befehle {
 			System.out.println("bitte versuchen sie es erneut");
 		}
 
-	//test
-		//Change
+	
 	}
 	
 	public static void addKunde(String[] parameter) {
