@@ -19,4 +19,5 @@ TODO list:
 -Befehl: addArtikel (name, nummer, Menge, verfügbarkeit)
 -Kunden löschen erschweren
 -Rechnung als Datei (PDF) speichern
+s9fu8sduf
 */
