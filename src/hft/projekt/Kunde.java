@@ -10,7 +10,7 @@ public class Kunde implements Serializable{
 	protected String name;
 	protected int kundennr;
 	protected LocalDate beitrittsdatum;
-	protected HashMap<Integer, Auftrag> aufträge;
+	protected HashMap<Integer, Auftrag> auftraege;
 	
 	
 	
@@ -34,11 +34,11 @@ public class Kunde implements Serializable{
 	public void setKundennr(int kundennr) {
 		this.kundennr = kundennr;
 	}
-	public HashMap<Integer, Auftrag> getAufträge() {
-		return aufträge;
+	public HashMap<Integer, Auftrag> getAuftraege() {
+		return auftraege;
 	}
-	public void setAufträge(HashMap<Integer, Auftrag> aufträge) {
-		this.aufträge = aufträge;
+	public void setAuftraege(HashMap<Integer, Auftrag> auftraege) {
+		this.auftraege = auftraege;
 	}
 	
 	
