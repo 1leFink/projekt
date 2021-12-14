@@ -43,8 +43,16 @@ public class Kunde implements Serializable{
 	
 	
 	public void displayInfo() {
+		String padded1 = String.format("%1$-20s", "Name:");
+		String padded2 = String.format("%1$-20s", "Kundennummer:");
+		String padded3 = String.format("%1$-20s", "Kunde:");
 		System.out.println("---------------------INFO--------------------------");
-		System.out.printf("Name: %20s %nKundennummer: %10d %nKunde seit: %20s %n",name, kundennr, beitrittsdatum.toString());
+		System.out.print(padded1);
+		System.out.printf("%s%n", name);
+		System.out.print(padded2);
+		System.out.printf("%s%n", kundennr);
+		System.out.print(padded3);
+		System.out.printf("%s%n", beitrittsdatum.toString());
 		System.out.println("---------------------------------------------------");
 	}
 	
