@@ -18,8 +18,9 @@ public class Rechnung {
 		
 		double i = 0;
 		for (int j = 0; j<artikel.size(); j++) {
-			
+			i += artikel.get(j).getPreis();
 		}
+		return i;
 	}
 
 	public double getGesamtpreis() {

@@ -19,13 +19,13 @@ public class Auftrag implements Serializable{
 		this.auftragsNr = auftragsNummerErstellen();
 	}
 	
-	public void gesamtpreisBerechnen() {
-		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		double i = 0;
-		for (int j = 0; ; j++) {
-			
-		}
-	}
+//	public void gesamtpreisBerechnen() {
+//		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+//		double i = 0;
+//		for (int j = 0; j<artikelListe.size(); j++) {
+//			
+//		}
+//	}
 	
 	public void bestellen(List<Artikel> artikel) {
 		Rechnung rechnung = new Rechnung(artikel);
