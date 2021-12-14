@@ -20,4 +20,5 @@ TODO list:
 -Kunden löschen erschweren
 -Rechnung als Datei (PDF) speichern
 s9fu8sduf
+-Befehl: editKunde
 */
