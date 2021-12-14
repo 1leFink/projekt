@@ -10,7 +10,7 @@ TODO list:
 -Privatekunde -> Mehrwertsteuer reingerechnet
 -Gewerbekunde -> Mehrwertsteuer rausrechnen
 -Artikel
--Lagerverwaltung -> txt datei formatiert einlesen |Artikelname|Artikelnummer|Menge|Verfügbarkeit|
+-Lagerverwaltung -> txt datei formatiert einlesen |Artikelname|Artikelnummer|Menge|Preis
 -Lager
 -Auftrag --> vervollständigen
 -Exceptions in befehle ergänzen
@@ -21,4 +21,5 @@ TODO list:
 -Rechnung als Datei (PDF) speichern
 s9fu8sduf
 -Befehl: editKunde
+
 */

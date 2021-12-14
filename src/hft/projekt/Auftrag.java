@@ -27,6 +27,12 @@ public class Auftrag implements Serializable{
 		}
 	}
 	
+	public void bestellen(List<Artikel> artikel) {
+		Rechnung rechnung = new Rechnung(artikel);
+		
+	}
+	
+	
 	public int getAuftragsNr() {
 		return auftragsNr;
 	}
