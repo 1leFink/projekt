@@ -1,7 +1,5 @@
 package hft.projekt;
 
-import java.io.Serializable;
-
 public class Projekt{
 
 	static boolean opened = false;

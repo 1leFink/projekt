@@ -122,7 +122,7 @@ public class Befehle {
 		}
 		catch(Exception e) {
 			Kunde kunde = k.getKundeByName(parameter[0]);
-			System.out.println("Kunde "  + kunde.getName() + " wirklich l�schen? y/n");
+			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(parameter[0]);
 				System.out.println("Kunde wurde entfernt. \n");
