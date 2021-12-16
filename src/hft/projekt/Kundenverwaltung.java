@@ -1,7 +1,11 @@
 package hft.projekt;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Scanner;
+
 
 public class Kundenverwaltung implements Serializable{
 
@@ -86,14 +90,40 @@ public void kundeEntfernen(String kundenname) {
 
 	public void listKunden() {
 		System.out.println("-------------Kunden--------------");
-		System.out.printf("%-10s%-10s%-10s%n%n", "Name", "Nr.", "Beitrittsdatum");
+		System.out.printf("%-15s%-15s%-15s%n%n", "Name", "Nr.", "Beitrittsdatum");
 		for(Kunde k : kunden.values()) {
 			
-			System.out.printf("%-10s%-10s%-10s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
+			System.out.printf("%-15s%-15s%-15s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
 			
 			
 		}
 		System.out.println("----------------------------------");
+	}
+	
+	
+	//debug Methods / Test Methods
+	
+	//
+	public void fillKunden(){
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		try {
+			Scanner sc = new Scanner(new FileInputStream("names"));
+			
+			while(sc.hasNext()) {
+				Kunde kunde = new Kunde(sc.next());
+				k.kundeHinzufuegen(kunde);
+			
+			}
+			
+			sc.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Speicherverwaltung.saveKundenverwaltung(k);
+		
 	}
 	
 	

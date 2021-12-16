@@ -66,12 +66,22 @@ public class Befehle {
 			case "listKunden":
 				listKunden();
 				break;
+			case "#fillKunden":
+				fillKunden();
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
 				
 		}
 	
 		Projekt.run();
+	}
+	
+	//Debug method
+	private static void fillKunden() {
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		k.fillKunden();
+		
 	}
 	//s
 	public static void infoKunde(String[] parameter) {

@@ -17,18 +17,17 @@ public class Projekt{
 			opened = true;
 		}
 		
-		
+		Kundenverwaltung verwaltung;
 		
 		if(Speicherverwaltung.firstStart() == true) {
-			Kundenverwaltung verwaltung = new Kundenverwaltung();
+			verwaltung = new Kundenverwaltung();
 			Speicherverwaltung.saveKundenverwaltung(verwaltung);
 			
-			
 		}else {
-			Kundenverwaltung verwaltung = Speicherverwaltung.loadKundenverwaltung();
+			verwaltung = Speicherverwaltung.loadKundenverwaltung();
 		}
 		
-
+		
 
 		
 		Befehle.befehlEinlesen();
