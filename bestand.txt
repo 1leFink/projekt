@@ -1,2 +1,2 @@
-	123192|Banane|2.99|100|21.01.2021|Lebensmittel
+123192|Banane|2.99|100|21.01.2021|Lebensmittel
 293843|Apfel|0.99|50|21.02.2021|Lebensmittel

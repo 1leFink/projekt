@@ -49,6 +49,7 @@ public void kundeEntfernen(String kundenname) {
 			if(k.getName().equals(kundenname)) {
 				kunden.remove(k.getKundennr());
 				found = true;
+				break;
 				
 			}
 		
@@ -59,7 +60,6 @@ public void kundeEntfernen(String kundenname) {
 	}
 	
 
-	
 	public Kunde getKundeByNr(int nr) {
 		boolean found = false;
 		for(int i : kunden.keySet()) {

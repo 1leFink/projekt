@@ -4,7 +4,7 @@
 
 /*
 
-TODO list:
+ list:
 
 -Rechnung
 -Privatekunde -> Mehrwertsteuer reingerechnet

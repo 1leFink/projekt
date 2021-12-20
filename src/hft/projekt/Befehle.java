@@ -16,7 +16,7 @@ public class Befehle {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.print(">>>: ");
+		System.out.print(">>> ");
 		
 		/*
 		 * Ein befehl besteht aus dem Befehlsnamen und der richtigen Anzahl an Parametern.
@@ -69,6 +69,9 @@ public class Befehle {
 			case "#fillKunden":
 				fillKunden();
 				break;
+			case "listLager":
+				listLager();
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
 				
@@ -77,6 +80,13 @@ public class Befehle {
 		Projekt.run();
 	}
 	
+	private static void listLager() {
+		// TODO Auto-generated method stub
+		Lager l = new Lager();
+		l.bestandEinlesen();
+		l.lagerAnzeigen();
+	}
+
 	//Debug method
 	private static void fillKunden() {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
@@ -139,9 +149,11 @@ public class Befehle {
 			}
 			
 		}
+		finally {
+			Speicherverwaltung.saveKundenverwaltung(k);
+		}
 		
-		Speicherverwaltung.saveKundenverwaltung(k);
-		
+	
 	}
 	
 	public static void listKunden() {
