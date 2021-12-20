@@ -1,6 +1,8 @@
 package hft.projekt;
 
-public class Artikel {
+import java.io.Serializable;
+
+public class Artikel implements Serializable{
 	
 	private String artikelName;
 	private int artikelNr;

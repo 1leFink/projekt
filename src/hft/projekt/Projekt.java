@@ -18,6 +18,7 @@ public class Projekt{
 		}
 		
 		Kundenverwaltung verwaltung;
+		Lager lager;
 		
 		if(Speicherverwaltung.firstStart() == true) {
 			verwaltung = new Kundenverwaltung();
@@ -27,7 +28,13 @@ public class Projekt{
 			verwaltung = Speicherverwaltung.loadKundenverwaltung();
 		}
 		
-	
+		if(Speicherverwaltung.lagerExists() == true) {
+			lager = Speicherverwaltung.loadLager();
+		}else {
+			lager = new Lager();
+			Speicherverwaltung.saveLager(lager);
+		}
+		
 		
 		Befehle.befehlEinlesen();
 	

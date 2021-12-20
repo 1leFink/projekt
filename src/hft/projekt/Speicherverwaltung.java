@@ -47,7 +47,6 @@ public class Speicherverwaltung implements Serializable{
 	
 	public static void saveKundenverwaltung(Kundenverwaltung m) {
 		
-		
 		try {
 			FileOutputStream fOut = new FileOutputStream(kundenpath);
 			ObjectOutputStream objOut = new ObjectOutputStream(fOut);
@@ -69,12 +68,61 @@ public class Speicherverwaltung implements Serializable{
 			e.printStackTrace();
 		}
 	
-	
-		
-	
 	}
 	
+	public static void saveLager(Lager l) {
+		
+		try {
+			FileOutputStream fOut = new FileOutputStream(lagerpath);
+			ObjectOutputStream objOut = new ObjectOutputStream(fOut);
+			
+			objOut.writeObject(l);
+			
+			fOut.close();
+			objOut.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Lager konnte nicht gespeichert werden: Datei nicht gefunden");
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Lager konnte nicht gespeichert werden: Fehler beim Lesen/Schreiben");
 	
+			e.printStackTrace();
+		}
+	
+	}
+
+
+	public static Lager loadLager() {
+		
+		try {
+			FileInputStream fileIn = new FileInputStream(lagerpath);
+			ObjectInputStream objIn = new ObjectInputStream(fileIn);
+			
+			Lager l = (Lager) objIn.readObject();
+			
+			fileIn.close();
+			objIn.close();
+			
+			return l;
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+	}
 
 	public static boolean firstStart() {
 		
@@ -86,6 +134,18 @@ public class Speicherverwaltung implements Serializable{
 			return true;
 		}
 		
+	}
+	
+	public static boolean lagerExists() {
+		
+		File file = new File(lagerpath); 
+			if(file.exists()) {
+				return true;
+			}
+			else {
+				return false;
+			
+		}
 	}
 	
 }

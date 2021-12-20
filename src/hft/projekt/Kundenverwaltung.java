@@ -126,5 +126,9 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 	
+	public void clear() {
+		kunden.clear();
+	}
+	
 	
 }

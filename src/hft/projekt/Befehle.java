@@ -31,13 +31,15 @@ public class Befehle {
 		 * 
 		 */
 		
+		
+		
 		String befehl = sc.next();
 		String[] param;
-		befehl = befehl +"-"+ sc.nextLine();
+		befehl = befehl +"|"+ sc.nextLine();
 		
 		befehl = befehl.replaceAll("\\s+", "");
 		
-		String[] b = befehl.split("-");
+		String[] b = befehl.split("[|]");
 	
 		param = new String[b.length-1];
 		
@@ -46,12 +48,9 @@ public class Befehle {
 		}
 		befehl = b[0];
 		
-//		if(param.length == 0) {
-//			System.out.println("Bitte geben sie einen Parameter mit an");
-//			Projekt.run();
-//		}
-		
+
 		System.out.println("DEBUG: " + befehl);
+		System.out.println(Arrays.toString(param));
 		
 		switch(befehl) {
 			case "infoKunde":
@@ -61,7 +60,15 @@ public class Befehle {
 				addKunde(param);
 				break;
 			case "rmKunde":
-				rmKunde(param);
+				
+				switch(param[0]) {
+				case "-all":
+					rmAll();
+					break;
+				default:
+					rmKunde(param);
+					break;
+				}
 				break;
 			case "listKunden":
 				listKunden();
@@ -80,10 +87,16 @@ public class Befehle {
 		Projekt.run();
 	}
 	
+	private static void rmAll() {
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		k.clear();
+		Speicherverwaltung.saveKundenverwaltung(k);
+		
+	}
+
 	private static void listLager() {
 		// TODO Auto-generated method stub
-		Lager l = new Lager();
-		l.bestandEinlesen();
+		Lager l = Speicherverwaltung.loadLager();
 		l.lagerAnzeigen();
 	}
 
@@ -93,7 +106,7 @@ public class Befehle {
 		k.fillKunden();
 		
 	}
-	//s
+
 	public static void infoKunde(String[] parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde;
@@ -142,12 +155,17 @@ public class Befehle {
 		}
 		catch(Exception e) {
 			Kunde kunde = k.getKundeByName(parameter[0]);
+			
+			//Kunde ist null wenn es kein Kunde mit dem Namen gibt
+			if(kunde != null) {
+				
 			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(parameter[0]);
 				System.out.println("Kunde wurde entfernt. \n");
-			}
+				}
 			
+			}
 		}
 		finally {
 			Speicherverwaltung.saveKundenverwaltung(k);

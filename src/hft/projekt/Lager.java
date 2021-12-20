@@ -2,11 +2,12 @@ package hft.projekt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Lager {
+public class Lager implements Serializable{
 
 	private HashMap<Integer, Artikel> bestand;
 	
