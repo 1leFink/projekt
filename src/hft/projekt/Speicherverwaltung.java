@@ -12,13 +12,14 @@ import java.io.Serializable;
 public class Speicherverwaltung implements Serializable{
 
 	
-	final static String path = Misc.SAVE_PATH.getWert();
+	final static String kundenpath = Misc.KSAVE_PATH.getWert();
+	final static String lagerpath = Misc.LSAVE_PATH.getWert();
 
 	
 	public static Kundenverwaltung loadKundenverwaltung() {
 		
 		try {
-			FileInputStream fileIn = new FileInputStream(path);
+			FileInputStream fileIn = new FileInputStream(kundenpath);
 			ObjectInputStream objIn = new ObjectInputStream(fileIn);
 			
 			Kundenverwaltung k = (Kundenverwaltung) objIn.readObject();
@@ -48,7 +49,7 @@ public class Speicherverwaltung implements Serializable{
 		
 		
 		try {
-			FileOutputStream fOut = new FileOutputStream(path);
+			FileOutputStream fOut = new FileOutputStream(kundenpath);
 			ObjectOutputStream objOut = new ObjectOutputStream(fOut);
 			
 			objOut.writeObject(m);
@@ -69,11 +70,15 @@ public class Speicherverwaltung implements Serializable{
 		}
 	
 	
+		
+	
 	}
+	
+	
 
 	public static boolean firstStart() {
 		
-		File file = new File(path);
+		File file = new File(kundenpath);
 		if(file.exists()) {
 			return false;
 		}

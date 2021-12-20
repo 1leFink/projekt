@@ -6,7 +6,8 @@ public enum Misc implements Serializable{
 
 	VERSION("1.0"),
 	NAME("projekt"),
-	SAVE_PATH("C:\\Users\\Leon\\Desktop\\save\\Kundenverwaltung.txt"),
+	KSAVE_PATH("C:\\Users\\Leon\\Desktop\\save\\Kundenverwaltung.txt"),
+	LSAVE_PATH("C:\\Users\\Leon\\Desktop\\save\\Lager.txt"),
 	//SAVE_PATH("C:\\Users\\flova\\Desktop\\save\\Kundenverwaltung.txt"),
 	BANNER("_____/\\\\\\\\\\\\\\\\\\\\\\____/\\\\\\_______________________________________________________________________________________________/\\\\\\___________/\\\\\\\\\\\\\\____        \r\n"
 			+ " ___/\\\\\\/////////\\\\\\_\\/\\\\\\___________________________________________________________________________________________/\\\\\\\\\\\\\\_________/\\\\\\/////\\\\\\__       \r\n"
