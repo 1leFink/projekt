@@ -16,7 +16,7 @@ public class Befehle {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Allah: ");
+		System.out.print(">>>: ");
 		
 		/*
 		 * Ein befehl besteht aus dem Befehlsnamen und der richtigen Anzahl an Parametern.

@@ -27,7 +27,9 @@ public class Projekt{
 			verwaltung = Speicherverwaltung.loadKundenverwaltung();
 		}
 		
-		
+		Lager l = new Lager();
+		l.bestandEinlesen();
+		l.lagerAnzeigen();
 
 		
 		Befehle.befehlEinlesen();

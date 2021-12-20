@@ -6,15 +6,18 @@ public class Artikel {
 	private int artikelNr;
 	private double preis;
 	private int menge;
+	private String haltbarkeit;
 	private boolean verfuegbarkeit;
+	private String kategorie;
 	
-	public Artikel(String artikelName, int artikelNr, double preis,int menge, boolean verfuegbarkeit) {
+	public Artikel(String artikelName, int artikelNr, double preis,int menge, String haltbarkeit, String kategorie) {
 		super();
 		this.artikelName = artikelName;
 		this.artikelNr = artikelNr;
 		this.preis = preis;
 		this.menge = menge;
-		this.verfuegbarkeit = verfuegbarkeit;
+		this.haltbarkeit = haltbarkeit;
+		this.kategorie = kategorie;
 	}
 
 	public String getArtikelName() {
@@ -55,6 +58,22 @@ public class Artikel {
 
 	public void setVerfuegbarkeit(boolean verfuegbarkeit) {
 		this.verfuegbarkeit = verfuegbarkeit;
+	}
+
+	public String getHaltbarkeit() {
+		return haltbarkeit;
+	}
+
+	public void setHaltbarkeit(String haltbarkeit) {
+		this.haltbarkeit = haltbarkeit;
+	}
+
+	public String getKategorie() {
+		return kategorie;
+	}
+
+	public void setKategorie(String kategorie) {
+		this.kategorie = kategorie;
 	}
 	
 	
