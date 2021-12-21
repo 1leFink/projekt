@@ -3,6 +3,7 @@ package hft.projekt;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
