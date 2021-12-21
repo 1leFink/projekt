@@ -41,7 +41,6 @@ public class Lager implements Serializable{
 				String[] werte = line.split("[|]");
 				
 				
-			
 				String name = werte[1];
 				int nr = Integer.valueOf(werte[0]);
 				double preis = Double.parseDouble(werte[2]);
