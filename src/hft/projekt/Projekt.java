@@ -18,6 +18,7 @@ public class Projekt{
 		if(opened == false) {
 			System.out.println(Misc.BANNER.getWert());
 			opened = true;
+			System.out.println("Für eine liste der Befehle: help");
 		}
 		
 		Kundenverwaltung verwaltung;

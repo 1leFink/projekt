@@ -47,8 +47,8 @@ public class Befehle {
 		
 		
 		//Debug nur für uns
-		System.out.println("DEBUG: " + befehl);
-		System.out.println(Arrays.toString(param));
+//		System.out.println("DEBUG: " + befehl);
+//		System.out.println(Arrays.toString(param));
 		
 		switch(befehl) {
 			case "infoKunde":
