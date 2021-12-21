@@ -22,7 +22,7 @@ public class Kundenverwaltung implements Serializable{
 		return kunden;
 	}
 	
-	
+
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
 	}

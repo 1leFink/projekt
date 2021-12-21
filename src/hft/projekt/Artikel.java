@@ -8,17 +8,15 @@ public class Artikel implements Serializable{
 	private int artikelNr;
 	private double preis;
 	private int menge;
-	private String haltbarkeit;
 	private boolean verfuegbarkeit;
 	private String kategorie;
 	
-	public Artikel(String artikelName, int artikelNr, double preis,int menge, String haltbarkeit, String kategorie) {
+	public Artikel(String artikelName, int artikelNr, double preis,int menge, String kategorie) {
 		super();
 		this.artikelName = artikelName;
 		this.artikelNr = artikelNr;
 		this.preis = preis;
 		this.menge = menge;
-		this.haltbarkeit = haltbarkeit;
 		this.kategorie = kategorie;
 	}
 
@@ -62,13 +60,6 @@ public class Artikel implements Serializable{
 		this.verfuegbarkeit = verfuegbarkeit;
 	}
 
-	public String getHaltbarkeit() {
-		return haltbarkeit;
-	}
-
-	public void setHaltbarkeit(String haltbarkeit) {
-		this.haltbarkeit = haltbarkeit;
-	}
 
 	public String getKategorie() {
 		return kategorie;
@@ -79,6 +70,6 @@ public class Artikel implements Serializable{
 	}
 	
 	
-//hello
+
 	
 }

@@ -1,2 +1,4 @@
-29|Banane|2.99|100|21.01.2021|Lebensmittel
-3|Apfel|0.99|50|21.02.2021|Lebensmittel
+29|Banane|2.99|100|Lebensmittel
+43|zucker|3.00|20|Lebensmittel
+3|Apfel|0.99|50|Lebensmittel
+

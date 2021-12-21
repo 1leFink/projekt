@@ -1,5 +1,7 @@
 package hft.projekt;
 
+import java.io.File;
+
 public class Projekt{
 
 	static boolean opened = false;
@@ -7,10 +9,11 @@ public class Projekt{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		run();
+		
+		
 	}
 
 	public static void run() {
-		
 		
 		if(opened == false) {
 			System.out.println(Misc.BANNER.getWert());

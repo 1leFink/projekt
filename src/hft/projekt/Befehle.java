@@ -26,10 +26,7 @@ public class Befehle {
 		 * addKunde (name)
 		 * rmkunde (kundennummer/name)
 		 * rmartikel (artikelnummer/artikelname)
-		 * 
-		 * 
-		 * 
-		 */
+		 */	
 		
 		
 		
@@ -48,7 +45,8 @@ public class Befehle {
 		}
 		befehl = b[0];
 		
-
+		
+		//Debug nur für uns
 		System.out.println("DEBUG: " + befehl);
 		System.out.println(Arrays.toString(param));
 		
@@ -60,7 +58,6 @@ public class Befehle {
 				addKunde(param);
 				break;
 			case "rmKunde":
-				
 				switch(param[0]) {
 				case "-all":
 					rmAll();
@@ -79,6 +76,12 @@ public class Befehle {
 			case "listLager":
 				listLager();
 				break;
+			case "readArtikel":
+				readArtikel();
+				break;
+			case "help":
+				help();
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
 				
@@ -87,6 +90,32 @@ public class Befehle {
 		Projekt.run();
 	}
 	
+	private static void help() {
+		
+		System.out.println("------------------------------------------------------------------------------------------Befehle--------------------------------------------------------------------------------------------------");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n%n", "Befehl", "Parameter", "erw. Parameter", "Beschreibung", "Beispiele");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "infoKunde", "Kundenname, Kundennr.", "", "Gibt informationen über den Kunden an.", "'infoKunde Max', 'infoKunde 12345'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "addKunde", "Kundenname", "", "Erstellt einen Kunden mit angegebenen Namen.", "'addKunde Max'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "rmKunde", "Kundenname, Kundennr." , "-all", "Löscht einen Kunden nach Bestätigung.", "'rmKunde Max', 'rmKunde 12345', 'rmKunde -all'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listKunden", "", "-name, -nr, -datum", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listLager", "", "-name, -nr, -menge", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
+		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		//		
+//		System.out.println("infoKunde (name/nr) \t - Gibt Informationen über den Kunden an.");
+//		System.out.println("addKunde (name) \t - Erstellt einen Kunden mit angegebenen Namen.");
+//		System.out.println("rmKunde (name/nr/-all)");
+		
+	}
+
+	private static void readArtikel() {
+		// TODO Auto-generated method stub
+		
+		Lager lager = Speicherverwaltung.loadLager();
+		lager.bestandEinlesen();
+		Speicherverwaltung.saveLager(lager);
+		
+	}
+
 	private static void rmAll() {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		k.clear();
@@ -115,7 +144,7 @@ public class Befehle {
 			Integer.parseInt(parameter[0]);
 			kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
 		}catch(Exception e){
-			//infoKunde wurde ein Namen �bergeben
+			//infoKunde wurde ein Namen uebergeben
 			 kunde = k.getKundeByName(parameter[0]);
 		}
 		
@@ -146,7 +175,7 @@ public class Befehle {
 			Integer.parseInt(parameter[0]);
 			Kunde kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
 			
-			System.out.println("Kunde "  + kunde.getName() + " wirklich l�schen? y/n");
+			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(Integer.valueOf(parameter[0]));
 				System.out.println("Kunde wurde entfernt. \n");
@@ -171,7 +200,6 @@ public class Befehle {
 			Speicherverwaltung.saveKundenverwaltung(k);
 		}
 		
-	
 	}
 	
 	public static void listKunden() {
