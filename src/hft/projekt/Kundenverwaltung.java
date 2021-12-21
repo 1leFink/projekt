@@ -89,7 +89,7 @@ public void kundeEntfernen(String kundenname) {
 	}
 
 	public void listKunden() {
-		System.out.println("-------------Kunden--------------");
+		System.out.println("--------------------Kunden--------------------");
 		System.out.printf("%-15s%-15s%-15s%n%n", "Name", "Nr.", "Beitrittsdatum");
 		for(Kunde k : kunden.values()) {
 			
@@ -97,7 +97,7 @@ public void kundeEntfernen(String kundenname) {
 			
 			
 		}
-		System.out.println("----------------------------------");
+		System.out.println("----------------------------------------------");
 	}
 	
 	
@@ -107,7 +107,7 @@ public void kundeEntfernen(String kundenname) {
 	public void fillKunden(){
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		try {
-			Scanner sc = new Scanner(new FileInputStream("names"));
+			Scanner sc = new Scanner(new FileInputStream(Misc.NAMES_PATH.getWert()));
 			
 			while(sc.hasNext()) {
 				Kunde kunde = new Kunde(sc.next());

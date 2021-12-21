@@ -32,7 +32,7 @@ public class Lager implements Serializable{
 		
 		
 		//C:\\Users\\Leon\\Desktop\\save\\bestand.txt
-		File f = new File("bestand.txt");
+		File f = new File(Misc.READ_PATH.getWert());
 		
 		try {
 			Scanner sc = new Scanner(f);
