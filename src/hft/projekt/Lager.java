@@ -22,7 +22,7 @@ public class Lager implements Serializable{
 		System.out.printf("%-15s%-15s%-15s%-15s%-15s%n%n", "Name", "Nr.", "Preis", "Menge", "Kategorie");
 		for(Artikel k : bestand.values()) {
 			
-			System.out.printf("%-15s%-15s%-15s%-15s%-15s%n", k.getArtikelName(), Integer.toString(k.getArtikelNr()), k.getPreis() +"€", k.getMenge(), k.getKategorie());
+			System.out.printf("%-15s%-15s%-15s%-15s%-15s%n", k.getArtikelName(), Integer.toString(k.getArtikelNr()), k.getPreis() +"\u20AC", k.getMenge(), k.getKategorie());
 	
 		}
 		System.out.println("----------------------------------------------------------------------------------------");
