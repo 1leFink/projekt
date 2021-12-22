@@ -20,7 +20,7 @@ public class Projekt{
 			opened = true;
 
 		
-			System.out.println("Fï¿½r eine liste der Befehle: help");
+			System.out.println("Für eine liste der befehle geben sie 'help' ein. Um das Program zu schließen geben sie 'quit' ein.");
 
 		}
 		

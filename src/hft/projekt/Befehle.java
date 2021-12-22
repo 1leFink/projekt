@@ -1,6 +1,8 @@
 package hft.projekt;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -30,25 +32,34 @@ public class Befehle {
 		
 		
 		
-		String befehl = sc.next();
-		String[] param;
-		befehl = befehl +"|"+ sc.nextLine();
+//		String befehl = sc.next();
+//		String[] param;
+//		befehl = befehl +"|"+ sc.nextLine();
+//		
+//		befehl = befehl.replaceAll("\\s+", "");
+//		
+//		String[] b = befehl.split("[|]");
+//	
+//		param = new String[b.length-1];
+//		
+//		for(int i = 1; i<b.length; i++) {
+//			param[i-1] = b[i];
+//		}
+//		befehl = b[0];
 		
-		befehl = befehl.replaceAll("\\s+", "");
-		
-		String[] b = befehl.split("[|]");
-	
-		param = new String[b.length-1];
-		
-		for(int i = 1; i<b.length; i++) {
-			param[i-1] = b[i];
+		//trennt Befehl von Parametern
+		String lBefehl = sc.next() + sc.nextLine();
+		String[] lBefehlSplit = lBefehl.split("\\s");
+		String befehl = lBefehlSplit[0];
+		List<String> param = new ArrayList<String>(); 
+		for(int i = 1; i<lBefehlSplit.length; i++) {
+			param.add(lBefehlSplit[i]);
 		}
-		befehl = b[0];
 		
 		
 		//Debug nur für uns
-//		System.out.println("DEBUG: " + befehl);
-//		System.out.println(Arrays.toString(param));
+		System.out.println("DEBUG: " + befehl);
+		System.out.println(param.toString());
 		
 		switch(befehl) {
 			case "infoKunde":
@@ -58,14 +69,12 @@ public class Befehle {
 				addKunde(param);
 				break;
 			case "rmKunde":
-				switch(param[0]) {
-				case "-all":
+				if(param.contains("-all")) {
 					rmAll();
-					break;
-				default:
+				}else {
 					rmKunde(param);
-					break;
 				}
+				
 				break;
 			case "listKunden":
 				listKunden();
@@ -146,16 +155,21 @@ public class Befehle {
 		
 	}
 
-	public static void infoKunde(String[] parameter) {
+	public static void infoKunde(List<String> parameter) {
+		
+		if(parameter.isEmpty()){
+			System.out.println("Fehlende Parameter für 'infoKunde'");
+			befehlEinlesen();
+		}
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde;
 		
 		try {
-			Integer.parseInt(parameter[0]);
-			kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
+			Integer.parseInt(parameter.get(0));
+			kunde = k.getKundeByNr(Integer.valueOf(parameter.get(0)));
 		}catch(Exception e){
 			//infoKunde wurde ein Namen uebergeben
-			 kunde = k.getKundeByName(parameter[0]);
+			 kunde = k.getKundeByName(parameter.get(0));
 		}
 		
 		if(kunde != null) {
@@ -167,9 +181,9 @@ public class Befehle {
 	
 	}
 	
-	public static void addKunde(String[] parameter) {
+	public static void addKunde(List<String> parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		Kunde kunde = new Kunde(parameter[0]);
+		Kunde kunde = new Kunde(parameter.get(0));
 		k.kundeHinzufuegen(kunde);
 		Speicherverwaltung.saveKundenverwaltung(k);
 		
@@ -177,30 +191,30 @@ public class Befehle {
 		
 	}
 	
-	public static void rmKunde(String[] parameter) {
+	public static void rmKunde(List<String> parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Scanner sc = new Scanner(System.in);
 		
 		try {
-			Integer.parseInt(parameter[0]);
-			Kunde kunde = k.getKundeByNr(Integer.valueOf(parameter[0]));
+			Integer.parseInt(parameter.get(0));
+			Kunde kunde = k.getKundeByNr(Integer.valueOf(parameter.get(0)));
 			
 			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
-				k.kundeEntfernen(Integer.valueOf(parameter[0]));
+				k.kundeEntfernen(Integer.valueOf(parameter.get(0)));
 				System.out.println("Kunde wurde entfernt. \n");
 			}
 		
 		}
 		catch(Exception e) {
-			Kunde kunde = k.getKundeByName(parameter[0]);
+			Kunde kunde = k.getKundeByName(parameter.get(0));
 			
 			//Kunde ist null wenn es kein Kunde mit dem Namen gibt
 			if(kunde != null) {
 				
 			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
-				k.kundeEntfernen(parameter[0]);
+				k.kundeEntfernen(parameter.get(0));
 				System.out.println("Kunde wurde entfernt. \n");
 				}
 			
