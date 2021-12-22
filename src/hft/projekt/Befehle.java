@@ -82,6 +82,9 @@ public class Befehle {
 			case "help":
 				help();
 				break;
+			case "quit":
+				quit();
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
 				
@@ -90,6 +93,12 @@ public class Befehle {
 		Projekt.run();
 	}
 	
+	private static void quit() {
+		// TODO Auto-generated method stub
+		System.exit(0);
+		
+	}
+
 	private static void help() {
 		
 		System.out.println("------------------------------------------------------------------------------------------Befehle--------------------------------------------------------------------------------------------------");
@@ -99,6 +108,7 @@ public class Befehle {
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "rmKunde", "Kundenname, Kundennr." , "-all", "Löscht einen Kunden nach Bestätigung.", "'rmKunde Max', 'rmKunde 12345', 'rmKunde -all'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listKunden", "", "-name, -nr, -datum", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listLager", "", "-name, -nr, -menge", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
 		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//		
 //		System.out.println("infoKunde (name/nr) \t - Gibt Informationen über den Kunden an.");
