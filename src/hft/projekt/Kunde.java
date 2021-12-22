@@ -21,6 +21,8 @@ public class Kunde implements Serializable{
 		this.name = name;
 		this.kundennr = kundenNummerErstellen();
 		this.beitrittsdatum = LocalDate.now();
+		this.auftraege = new HashMap<Integer, Auftrag>();
+		
 		
 	}
 	public String getName() {
@@ -50,7 +52,8 @@ public class Kunde implements Serializable{
 	public void displayInfo() {
 		String padded1 = String.format("%1$-20s", "Name:");
 		String padded2 = String.format("%1$-20s", "Kundennummer:");
-		String padded3 = String.format("%1$-20s", "Kunde:");
+		String padded3 = String.format("%1$-20s", "Kunde seit:");
+		String padded4 = String.format("%1$-20s", "Auftraege");
 		System.out.println("---------------------INFO--------------------------");
 		System.out.print(padded1);
 		System.out.printf("%s%n", name);
@@ -58,6 +61,8 @@ public class Kunde implements Serializable{
 		System.out.printf("%s%n", kundennr);
 		System.out.print(padded3);
 		System.out.printf("%s%n", beitrittsdatum.toString());
+		System.out.print(padded4);
+		System.out.printf("%s%n", auftraege.size());
 		System.out.println("---------------------------------------------------");
 	}
 	
@@ -95,6 +100,23 @@ public class Kunde implements Serializable{
 			@Override
 			public int compare(Kunde k1,Kunde k2) {
 				return(k1.name.compareTo(k2.name));
+			}
+		};
+	}
+
+	public static Comparator<Kunde> compareByNr(){
+		return new Comparator<Kunde>() {
+			@Override
+			public int compare(Kunde k1,Kunde k2) {
+				return(k1.kundennr - k2.kundennr);
+			}
+		};
+	}
+	public static Comparator<Kunde> compareByAuftraege(){
+		return new Comparator<Kunde>() {
+			@Override
+			public int compare(Kunde k1,Kunde k2) {
+				return(k1.auftraege.size() - k2.auftraege.size());
 			}
 		};
 	}

@@ -57,9 +57,9 @@ public class Befehle {
 		}
 		
 		
-		//Debug nur für uns
-		System.out.println("DEBUG: " + befehl);
-		System.out.println(param.toString());
+//		//Debug nur für uns
+//		System.out.println("DEBUG: " + befehl);
+//		System.out.println(param.toString());
 		
 		switch(befehl) {
 			case "infoKunde":
@@ -110,7 +110,7 @@ public class Befehle {
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "infoKunde", "Kundenname, Kundennr.", "", "Gibt informationen über den Kunden an.", "'infoKunde Max', 'infoKunde 12345'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "addKunde", "Kundenname", "", "Erstellt einen Kunden mit angegebenen Namen.", "'addKunde Max'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "rmKunde", "Kundenname, Kundennr." , "-all", "Löscht einen Kunden nach Bestätigung.", "'rmKunde Max', 'rmKunde 12345', 'rmKunde -all'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listKunden", "", "-name, -nr, -datum", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listKunden", "", "-name, -nr, -datum, -auft", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listLager", "", "-name, -nr, -menge", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
 		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -244,6 +244,10 @@ public class Befehle {
 			k.listKunden();	
 		}else if(parameter.contains("-name")) {
 			k.listKundenByName();
+		}else if(parameter.contains("-nr")) {
+			k.listKundenByNr();
+		}else if(parameter.contains("-auft")) {
+			k.listKundenbyAuftraege();
 		}
 		
 	}

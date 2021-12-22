@@ -96,15 +96,18 @@ public void kundeEntfernen(String kundenname) {
 	}
 
 	public void listKunden() {
-		System.out.println("--------------------Kunden--------------------");
-		System.out.printf("%-15s%-15s%-15s%n%n", "Name", "Nr.", "Beitrittsdatum");
+		System.out.println("---------------------------Kunden---------------------------------");
+		System.out.printf("%-15s%-15s%-15s%15s%n%n", "Name", "Nr.", "Beitrittsdatum", "Auftraege");
 		for(Kunde k : kunden.values()) {
+			int aufträge;
 			
-			System.out.printf("%-15s%-15s%-15s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
+			
+			
+			System.out.printf("%-15s%-15s%-15s%15d%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString(), k.getAuftraege().size());
 			
 			
 		}
-		System.out.println("----------------------------------------------");
+		System.out.println("------------------------------------------------------------------");
 	}
 	
 	
@@ -139,40 +142,61 @@ public void kundeEntfernen(String kundenname) {
 
 	public void listKundenByName() {
 		
-		System.out.println("ja");
-		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
-		
 		
 		Collections.sort(kHash, Kunde.compareByName());
 		
-//		for(Kunde k : kHash) {
-//			System.out.println(k.getName());
-//		}
-		
 		HashMap<Integer, Kunde> sortedMap = new LinkedHashMap<Integer, Kunde>();
-		
 		
 		for(Kunde k : kHash) {
 			sortedMap.put(k.getKundennr(), k);
 		}
 		
-//		for(Map.Entry<Integer, Kunde> entry : sortedMap.entrySet()) {
-//			System.out.println(entry.getValue().getName());
-//		}
+		printSortedMap(sortedMap);
 		
-		System.out.println("--------------------Kunden--------------------");
-		System.out.printf("%-15s%-15s%-15s%n%n", "Name", "Nr.", "Beitrittsdatum");
-		for(Kunde k : sortedMap.values()) {
-			
-			System.out.printf("%-15s%-15s%-15s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
-			
-			
+	}
+
+	public void listKundenByNr() {
+		
+		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
+		
+		Collections.sort(kHash, Kunde.compareByNr());
+		
+		HashMap<Integer, Kunde> sortedMap = new LinkedHashMap<Integer, Kunde>();
+		
+		for(Kunde k : kHash) {
+			sortedMap.put(k.getKundennr(), k);
 		}
-		System.out.println("----------------------------------------------");
 		
+		printSortedMap(sortedMap);
+		
+	}
+
+	public void listKundenbyAuftraege() {
+		
+List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
+		
+		Collections.sort(kHash, Kunde.compareByAuftraege());
+		
+		HashMap<Integer, Kunde> sortedMap = new LinkedHashMap<Integer, Kunde>();
+		
+		for(Kunde k : kHash) {
+			sortedMap.put(k.getKundennr(), k);
+		}
+		
+		printSortedMap(sortedMap);
 		
 	}
 	
+	public void printSortedMap(HashMap<Integer, Kunde> map) {
+		System.out.println("----------------------------Kunden--------------------------------");
+		System.out.printf("%-15s%-15s%-15s%15s%n%n", "Name", "Nr.", "Beitrittsdatum", "Auftraege");
+		for(Kunde k : map.values()) {
+			
+			System.out.printf("%-15s%-15s%-15s%15d%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString(), k.getAuftraege().size());
+				
+		}
+		System.out.println("------------------------------------------------------------------");
+	}
 	
 }
