@@ -3,7 +3,14 @@ package hft.projekt;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 
@@ -128,6 +135,43 @@ public void kundeEntfernen(String kundenname) {
 	
 	public void clear() {
 		kunden.clear();
+	}
+
+	public void listKundenByName() {
+		
+		System.out.println("ja");
+		
+		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
+		
+		
+		Collections.sort(kHash, Kunde.compareByName());
+		
+//		for(Kunde k : kHash) {
+//			System.out.println(k.getName());
+//		}
+		
+		HashMap<Integer, Kunde> sortedMap = new LinkedHashMap<Integer, Kunde>();
+		
+		
+		for(Kunde k : kHash) {
+			sortedMap.put(k.getKundennr(), k);
+		}
+		
+//		for(Map.Entry<Integer, Kunde> entry : sortedMap.entrySet()) {
+//			System.out.println(entry.getValue().getName());
+//		}
+		
+		System.out.println("--------------------Kunden--------------------");
+		System.out.printf("%-15s%-15s%-15s%n%n", "Name", "Nr.", "Beitrittsdatum");
+		for(Kunde k : sortedMap.values()) {
+			
+			System.out.printf("%-15s%-15s%-15s%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString());
+			
+			
+		}
+		System.out.println("----------------------------------------------");
+		
+		
 	}
 	
 	

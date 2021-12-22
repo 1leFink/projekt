@@ -69,15 +69,10 @@ public class Befehle {
 				addKunde(param);
 				break;
 			case "rmKunde":
-				if(param.contains("-all")) {
-					rmAll();
-				}else {
-					rmKunde(param);
-				}
-				
+				rmKunde(param);
 				break;
 			case "listKunden":
-				listKunden();
+				listKunden(param);
 				break;
 			case "#fillKunden":
 				fillKunden();
@@ -182,6 +177,12 @@ public class Befehle {
 	}
 	
 	public static void addKunde(List<String> parameter) {
+	
+		if(parameter.isEmpty()){
+			System.out.println("Fehlende Parameter für 'addKunde'");
+			befehlEinlesen();
+		}
+		
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde = new Kunde(parameter.get(0));
 		k.kundeHinzufuegen(kunde);
@@ -192,6 +193,15 @@ public class Befehle {
 	}
 	
 	public static void rmKunde(List<String> parameter) {
+		
+		if(parameter.isEmpty()){
+			System.out.println("Fehlende Parameter für 'infoKunde'");
+			befehlEinlesen();
+		}
+		else if(parameter.contains("-all")) {
+			rmAll();
+		}else {
+			
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Scanner sc = new Scanner(System.in);
 		
@@ -223,12 +233,18 @@ public class Befehle {
 		finally {
 			Speicherverwaltung.saveKundenverwaltung(k);
 		}
+	
+	}
 		
 	}
 	
-	public static void listKunden() {
+	public static void listKunden(List<String> parameter) {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		k.listKunden();
+		if(parameter.isEmpty()) {
+			k.listKunden();	
+		}else if(parameter.contains("-name")) {
+			k.listKundenByName();
+		}
 		
 	}
 }

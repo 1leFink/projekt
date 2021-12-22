@@ -2,6 +2,7 @@ package hft.projekt;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -65,22 +66,15 @@ public class Kunde implements Serializable{
 		int[] ziffern = {0,1,2,3,4,5,6,7,8,9};
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
-		
 		while(true) {
 		String num = "";
 		boolean duplicate = false;
-	
 		
 		num = num + ziffern[rand.nextInt(9)+1];
 		for(int i = 0; i<4; i++) {
 			int index = rand.nextInt(10);
 			num = num + ziffern[index];
-		
 		}
-		
-		
-		
-			
 		for(int i : k.getKunden().keySet()) {
 			if(i == Integer.parseInt(num)) {
 				duplicate = true;
@@ -96,6 +90,14 @@ public class Kunde implements Serializable{
 	
 	}
 	
+	public static Comparator<Kunde> compareByName(){
+		return new Comparator<Kunde>() {
+			@Override
+			public int compare(Kunde k1,Kunde k2) {
+				return(k1.name.compareTo(k2.name));
+			}
+		};
+	}
 	
 	
 }
