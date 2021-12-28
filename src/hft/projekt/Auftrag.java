@@ -2,6 +2,7 @@ package hft.projekt;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,11 +13,11 @@ public class Auftrag implements Serializable{
 	protected List<Artikel> artikelListe;
 	private Rechnung rechnung;
 	
-	public Auftrag(List<Artikel> artikelListe) {
+	public Auftrag() {
 		super();
-		this.artikelListe = artikelListe;
 		this.auftragsdatum = LocalDate.now();
 		this.auftragsNr = auftragsNummerErstellen();
+		this.artikelListe = new ArrayList<Artikel>();
 	}
 	
 //	public void gesamtpreisBerechnen() {
@@ -59,27 +60,30 @@ public class Auftrag implements Serializable{
 
 	public int auftragsNummerErstellen() {
 		
-		Random r = new Random();
+		Random rand = new Random();
 		int[] ziffern = {0,1,2,3,4,5,6,7,8,9};
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		String numRan = "";
-		boolean flag = false;
 		
 		while(true) {
-			for(int i = 0; i<4; i++) {
-				int index = r.nextInt(10);
-				numRan = numRan +""+ ziffern[index];
-			}
-			for(int i : k.getKunden().keySet()) {
-				if(i == Integer.valueOf(numRan)) {
-					flag = true;
-				}
-			}
-			if(flag == false) {
-			return Integer.valueOf(numRan);
+		String num = "";
+		boolean duplicate = false;
+		
+		num = num + ziffern[rand.nextInt(9)+1];
+		for(int i = 0; i<4; i++) {
+			int index = rand.nextInt(10);
+			num = num + ziffern[index];
+		}
+		for(int i : k.getKunden().keySet()) {
+			if(i == Integer.parseInt(num)) {
+				duplicate = true;
+				
 			}
 		}
-	
+		
+		if(duplicate == false) {
+			return Integer.parseInt(num);	
+			}
+		}
 	}
 	
 }

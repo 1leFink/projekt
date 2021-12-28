@@ -75,27 +75,55 @@ public class Lager implements Serializable{
 		
 	}
 	
-	public void mengeErhoehen(int nr, int anzahl) {
+	public boolean mengeErhoehen(int nr, int anzahl) {
 	
 		for(int i : bestand.keySet()) {
 			Artikel k = bestand.get(i);
 			if(k.getArtikelNr() == nr) {
 				k.setMenge(k.getMenge() + anzahl);
-				
+				return true;
 			}
 		}
+		return false;
 		
 		
 	}
 	
-	public void mengeErhoehen(String name, int anzahl) {
+	public boolean mengeErhoehen(String name, int anzahl) {
 		
 		for(Artikel k : bestand.values()) {
 			if(k.getArtikelName().equals(name)) {
 				k.setMenge(k.getMenge() + anzahl);
+				return true;
+			}	
+		}
+		return false;
+	}
+	
+	public boolean mengeReduzieren(String name, int anzahl) {
+		
+		for(Artikel k : bestand.values()) {
+			if(k.getArtikelName().equals(name) && k.getMenge() - anzahl > 0) {
+				k.setMenge(k.getMenge() - anzahl);
+				return true;
 				
 			}	
 		}
+		
+		System.out.println("Die angeforderte Menge überschreitet den Vorrat an Artikeln. "  );
+		return false;
+	}
+	
+	public boolean mengeReduzieren(int nr, int anzahl) {
+		
+		for(int i : bestand.keySet()) {
+			Artikel k = bestand.get(i);
+			if(k.getArtikelNr() == nr) {
+				k.setMenge(k.getMenge() - anzahl);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean artikelExists(String name) {
@@ -107,6 +135,22 @@ public class Lager implements Serializable{
 		return false;
 	}
 	
+	
+	public Artikel getArtikelByName(String name) {
+		
+		boolean found = false;
+		
+		for(Artikel k : bestand.values()) {
+			if(k.getArtikelName().equals(name)) {
+				return k;
+			}
+		}
+		if(found == false) {
+			System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden");
+		
+		}
+		return null;
+	}
 	
 	
 	

@@ -33,6 +33,8 @@ public class Kundenverwaltung implements Serializable{
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
 	}
+
+	
 	
 	public void kundeEntfernen(int kundennr) {
 		

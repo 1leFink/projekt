@@ -92,12 +92,131 @@ public class Befehle {
 			case "tutorial":
 				tutorial();
 				break;
+			case "bestellen":
+				bestellen(param);
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
 				
 		}
-	
+		
 		Projekt.run();
+	}
+	
+	
+	private static boolean bestellen(List<String> param) {
+	
+		//bestellen (Kundenname/Kundennr)
+		
+		Kundenverwaltung kv = Speicherverwaltung.loadKundenverwaltung();
+		Kunde kunde = null;
+		if(param.isEmpty()) {
+			System.out.println("Fehlende Parameter für 'bestellen'");
+			return false;
+		}
+		
+		if(param.size() == 1) {
+			kunde = kv.getKundeByName(param.get(0));
+			}
+	
+		//nicht Null wenn ein Kunde mit dem Namen existiert
+		if(kunde == null) {
+			return false;
+		}
+	
+		
+		boolean flag = true;
+		List<Artikel> artikel = new ArrayList<Artikel>();
+		Scanner sc = new Scanner(System.in);
+		Lager l = Speicherverwaltung.loadLager();
+		System.out.println("-----------------------------------Auftrag----------------------------------");
+		
+		while(flag) {
+			
+			
+			System.out.println("Artikelname: ");
+			String name = sc.next();
+			
+			if(l.artikelExists(name)) {
+				Artikel k = l.getArtikelByName(name);	
+			}else {
+				System.out.println("Artikel nicht gefunden versuche es erneut");
+				return false;
+			}
+			
+			System.out.println("Menge: ");
+			String smenge = sc.next();
+			
+			//überprüfen ob es sich um eine Zahl handelt
+			int menge;
+			try {
+				menge = Integer.parseInt(smenge);
+			}
+			catch (Exception e) {
+				System.out.println("Bitte geben sie eine Menge an");
+				return false;
+			}
+			
+			//Preis des Artikels berechnen
+			double preis = l.getArtikelByName(name).getPreis() * menge;
+			
+			
+			//übeprüfe ob Artikel bereits im Auftrag enthalten ist
+			boolean duplicate = false;
+			for(Artikel k : artikel) {
+				if(k.getArtikelName().equals(name)) {
+					k.setMenge(k.getMenge() + menge);
+					k.setPreis(k.getPreis() + l.getArtikelByName(name).getPreis() * menge);
+					duplicate = true;
+				}
+			}
+			//anderfalls neuen Artikel erstellen und zur Liste hinzufügen
+			if(duplicate == false) {
+				Artikel neu = new Artikel(name, 0, preis, menge, "");
+				artikel.add(neu);
+			}
+			
+
+			
+			//alle bisherigen Elemente des Auftrags drucken
+			System.out.println("----------------Auftrag--------------------------");
+			System.out.printf("%-15s %-15s %-15s %n%n", "Artikelname" , "Menge", "Preis");
+			
+			for(Artikel k : artikel) {
+				System.out.printf("%-15s %-15s %-15.2f\u20ac", k.getArtikelName(), k.getMenge(), k.getPreis());
+				System.out.println();
+			}
+			System.out.println("--------------------------------------------------");
+			double gesamt = 0;
+			for(Artikel k : artikel) {
+				gesamt += k.getPreis();
+			}
+			System.out.printf("%-15s %21.2f\u20ac%n", "Gesamt:", gesamt);
+			System.out.println("--------------------------------------------------");
+			System.out.println();
+			
+		
+			
+			System.out.println("Möchten sie noch einen Artikel hinzüfügen? y/n");
+			
+			if(sc.next().equals("n")) {
+				flag = false;
+			}
+			
+		}
+		//ende While schleife --> Auftrag kann abgeschickt werden
+		
+		//Auftrag wird von dem Kunde erstellt
+		if(kunde.bestellen(artikel)) {
+			System.out.println("Auftrag wurde übermittelt! \n");
+		}else {
+			System.out.println("Etwas ist schiefgelaufen, bitte versuchen sie es erneut.");
+		}
+		Speicherverwaltung.saveKundenverwaltung(kv);
+		
+		return true;
+	
+		
 	}
 	
 	private static void quit() {
@@ -260,7 +379,7 @@ public class Befehle {
 	public static void tutorial() {
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Hallo, willkommen zu der Interaktiven Einführung zu Shoppex. Diese kann einige Minuten in Anspruch nehmen. Sie können die Einführung jederzeit mit 'quit' abbrechen.");
+		System.out.println("Hallo, willkommen zu der Interaktiven Einführung zu Shoppex. Diese kann einige Minuten in Anspruch nehmen.");
 		System.out.println("Möchten sie fortfahren? y/n");
 		if(sc.next().equals("y")) {
 			System.out.println("\n\n\n");

@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 public class Kunde implements Serializable{
 
@@ -12,9 +15,6 @@ public class Kunde implements Serializable{
 	protected int kundennr;
 	protected LocalDate beitrittsdatum;
 	protected HashMap<Integer, Auftrag> auftraege;
-	
-	
-	
 	
 	public Kunde(String name) {
 		super();
@@ -65,6 +65,38 @@ public class Kunde implements Serializable{
 		System.out.printf("%s%n", auftraege.size());
 		System.out.println("---------------------------------------------------");
 	}
+	
+	public boolean bestellen(List<Artikel> artikel) {
+				
+		Auftrag auf = new Auftrag();
+		
+		for(Artikel k : artikel) {
+			auf.artikelListe.add(k);
+		}
+		
+		Lager l = Speicherverwaltung.loadLager();
+		
+		for(Artikel k : auf.artikelListe) {
+			
+			if(l.artikelExists(k.getArtikelName())) {
+				if(l.mengeReduzieren(k.getArtikelName(), k.getMenge()) == true){
+				}else {
+					return false;
+				}
+			}else {
+				System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden");
+				return false;
+			}
+		}
+		
+		auftraege.put(auf.getAuftragsNr(), auf);
+		Speicherverwaltung.saveLager(l);
+		return true;
+		
+	}
+	
+	
+	
 	
 	public int kundenNummerErstellen() {
 		Random rand = new Random();
