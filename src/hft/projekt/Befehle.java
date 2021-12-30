@@ -1,5 +1,8 @@
 package hft.projekt;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,34 +22,7 @@ public class Befehle {
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.print(">>> ");
-		
-		/*
-		 * Ein befehl besteht aus dem Befehlsnamen und der richtigen Anzahl an Parametern.
-		 * Beispiele:
-		 * 
-		 * infoKunde (kundennummer/name) 
-		 * addKunde (name)
-		 * rmkunde (kundennummer/name)
-		 * rmartikel (artikelnummer/artikelname)
-		 */	
-		
-		
-		
-//		String befehl = sc.next();
-//		String[] param;
-//		befehl = befehl +"|"+ sc.nextLine();
-//		
-//		befehl = befehl.replaceAll("\\s+", "");
-//		
-//		String[] b = befehl.split("[|]");
-//	
-//		param = new String[b.length-1];
-//		
-//		for(int i = 1; i<b.length; i++) {
-//			param[i-1] = b[i];
-//		}
-//		befehl = b[0];
-		
+
 		//trennt Befehl von Parametern
 		String lBefehl = sc.next() + sc.nextLine();
 		String[] lBefehlSplit = lBefehl.split("\\s");
@@ -55,12 +31,7 @@ public class Befehle {
 		for(int i = 1; i<lBefehlSplit.length; i++) {
 			param.add(lBefehlSplit[i]);
 		}
-		
-		
-//		//Debug nur für uns
-//		System.out.println("DEBUG: " + befehl);
-//		System.out.println(param.toString());
-		
+				
 		switch(befehl) {
 			case "infoKunde":
 				infoKunde(param);
@@ -95,15 +66,42 @@ public class Befehle {
 			case "bestellen":
 				bestellen(param);
 				break;
+			case "readScript":
+				readScript(param);
+				break;
 			default:
-				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");
-				
+				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");		
 		}
-		
 		Projekt.run();
 	}
 	
-	
+
+
+	private static boolean  readScript(List<String> param) {
+		// TODO Auto-generated method stub
+		
+		if(param.isEmpty()) {
+			System.out.println("Bitte geben sie den Pfad der Datei ein.");
+			return false;
+		}
+		
+		File file = new File(param.get(0));
+
+		if(file.exists()) {
+			befehlEinlesenScript(file);
+			return true;
+		}
+		else {
+			System.out.println("Kein Script zum einlesen gefunden.");
+			return false;
+		}
+		
+		
+		
+	}
+
+
+
 	private static boolean bestellen(List<String> param) {
 	
 		//bestellen (Kundenname/Kundennr)
@@ -222,7 +220,6 @@ public class Befehle {
 	private static void quit() {
 		// TODO Auto-generated method stub
 		System.exit(0);
-		
 	}
 
 	private static void help() {
@@ -236,7 +233,9 @@ public class Befehle {
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listLager", "", "-name, -nr, -menge", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "tutorial", "", "", "Interaktive Einfuerung zur Bedienung der Anwendung.", "" );
-		System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "bestellen", "Kundenname", "", "Erstellt einen Auftrag mit übergebenen Artikeln", "'bestellen Max'" );
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'" );
+		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//		
 //		System.out.println("infoKunde (name/nr) \t - Gibt Informationen über den Kunden an.");
 //		System.out.println("addKunde (name) \t - Erstellt einen Kunden mit angegebenen Namen.");
@@ -254,10 +253,17 @@ public class Befehle {
 	}
 
 	private static void rmAll() {
-		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		k.clear();
-		Speicherverwaltung.saveKundenverwaltung(k);
 		
+		Scanner sc = new Scanner(System.in);
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		
+		System.out.println("Alle Kunden werden gelöscht. Sind sie sicher? y/n");
+		
+		if(sc.next().equals("y")) {
+			System.out.println("Alle Kunden gelöscht.\n");
+			k.clear();
+			Speicherverwaltung.saveKundenverwaltung(k);
+		}	
 	}
 
 	private static void listLager() {
@@ -467,6 +473,78 @@ public class Befehle {
 		
 			System.out.println("Super! Damit verstehen sie die grundlegende Funktionsweise der Anwendung.");
 			System.out.println("Benutzen sie den befehl 'help' wenn sie weitere Hilfe brauchen.");
+		}
+		
+	}
+	
+public static void befehlEinlesenScript(File f) {
+		
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		
+		Scanner sc;
+		try {
+			sc = new Scanner(f);
+		
+			//trennt Befehl von Parametern
+			
+			while(sc.hasNext()) {
+			
+			String lBefehl = sc.next() + sc.nextLine();
+			String[] lBefehlSplit = lBefehl.split("\\s");
+			String befehl = lBefehlSplit[0];
+			List<String> param = new ArrayList<String>(); 
+			for(int i = 1; i<lBefehlSplit.length; i++) {
+				param.add(lBefehlSplit[i]);
+			}
+					
+			switch(befehl) {
+				case "infoKunde":
+					infoKunde(param);
+					break;
+				case "addKunde":
+					addKunde(param);
+					break;
+				case "rmKunde":
+					rmKunde(param);
+					break;
+				case "listKunden":
+					listKunden(param);
+					break;
+				case "#fillKunden":
+					fillKunden();
+					break;
+				case "listLager":
+					listLager();
+					break;
+				case "readArtikel":
+					readArtikel();
+					break;
+				case "help":
+					help();
+					break;
+				case "quit":
+					quit();
+					break;
+				case "tutorial":
+					tutorial();
+					break;
+				case "bestellen":
+					bestellen(param);
+					break;
+				case "readScript":
+					readScript(param);
+					break;
+				default:
+					System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");		
+			}
+			
+		}
+			Projekt.run();
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
