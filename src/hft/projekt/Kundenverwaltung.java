@@ -32,7 +32,7 @@ public class Kundenverwaltung implements Serializable{
 
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
-		System.out.println("Kunde '" + k.name + "' wurde hinzugef�gt");
+		System.out.println("Kunde '" + k.name + "' wurde hinzugefuegt");
 	}
 
 	

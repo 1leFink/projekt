@@ -390,6 +390,7 @@ public class Befehle {
 		System.out.println("Hallo, willkommen zu der Interaktiven Einführung zu Shoppex. Diese kann einige Minuten in Anspruch nehmen.");
 		System.out.println("Möchten sie fortfahren? y/n");
 		if(sc.next().equals("y")) {
+			
 			System.out.println("\n\n\n");
 			System.out.println("--1-- Navigation");
 			System.out.println("Die Anwendung wird durch Befehle gesteuert, welche man in der Kommandozeile eingeben muss.");
@@ -414,24 +415,29 @@ public class Befehle {
 			
 			boolean correct2 = false;
 			while(correct2 == false) {
-				if(sc.next().equals("listKunden")) {
+				String answer = sc.next() + sc.nextLine();
+				if(answer.equals("listKunden")) {
 					correct2 = true;
-					rmAll();
 					listKunden(new ArrayList<String>());
 				}else {
 					System.out.println("Es scheint als wurde der befehl falsch geschrieben. Versuche es erneut");
 				}
 			}
 			
-			System.out.println("Dies gibt eine Liste der Kunden im System an. Noch sind jedoch keine Vorhanden");
+			System.out.println("Dies gibt eine Liste der Kunden im System an. Eventuell sind jedoch keine Vorhanden");
 			System.out.println("Fügen sie mithilfe von 'addKunde' und anschließend einen Namen als Parameter, 3 neue Kunden hinzu.");
 			
 			boolean correct3 = false;
 			int count = 0;
 			while(correct3 == false) {
-				if(sc.next().equals("addKunde")) {
-					ArrayList<String> parameter = new ArrayList<String>();
-					parameter.add(sc.nextLine().replaceAll("\\s", ""));
+				
+				String[] answer = (sc.next() + sc.nextLine()).split("\\s");
+				ArrayList<String> parameter = new ArrayList<String>();
+				for(int i = 1; i<answer.length; i++) {
+					parameter.add(answer[i]);
+				}
+				
+				if(answer[0].equals("addKunde")) {
 					
 					addKunde(parameter);
 					count++;
@@ -439,8 +445,9 @@ public class Befehle {
 					if(count == 3) {
 						correct3 = true;
 					}
+					
 				}else {
-					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
+						System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
 				}
 			}
 			System.out.println("Gut gemacht! geben sie sie nun die Kundenliste erneut aus.");
@@ -455,7 +462,7 @@ public class Befehle {
 				}
 			}
 			
-			System.out.println("Die Kunden wurden erfolgreich zur Liste hinzugefügt.");
+			System.out.println("Die Kunden wurden erfolgreich zur Liste hinzugefuegt.");
 			System.out.println("Der Befehl 'listKunde' kann auch erweiterte Parameter haben: z.B. '-name','-nr'");
 			System.out.println("Diese Parameter sortieren die Liste und geben sie anschließend aus.");
 			System.out.println("Benutzen sie 'listKunden' mit einem erw. Parameter.");
