@@ -247,8 +247,12 @@ public class Befehle {
 		// TODO Auto-generated method stub
 		
 		Lager lager = Speicherverwaltung.loadLager();
-		lager.bestandEinlesen();
-		Speicherverwaltung.saveLager(lager);
+		if(lager.bestandEinlesen() == true) {
+			Speicherverwaltung.saveLager(lager);
+			System.out.println("Einlesen erfolgreich. Artikel wurden dem Lager hinzugefügt");
+		}else {
+			//Fehler beim einlesen -> nicht speichern
+		}
 		
 	}
 

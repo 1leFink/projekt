@@ -1,4 +1,1 @@
-29|Banane|2.99|100|Lebensmittel
-43|zucker|3.00|20|Lebensmittel
-3|Apfel|0.99|50|Lebensmittel
-4|Klopapier|3.99|20|Haushaltsmittel
+2|Banane|0.99|20|Lebensmittel

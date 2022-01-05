@@ -29,7 +29,7 @@ public class Lager implements Serializable{
 		
 	}
 	
-	public void bestandEinlesen() {
+	public boolean bestandEinlesen() {
 		
 		
 		//C:\\Users\\Leon\\Desktop\\save\\bestand.txt
@@ -39,40 +39,48 @@ public class Lager implements Serializable{
 			Scanner sc = new Scanner(f);
 			
 			while(sc.hasNext()) {
-				String line = sc.nextLine();
 				
-				String[] werte = line.split("[|]");
+				String line;
+				String[] werte;
+				String name;
+				int nr;
+				double preis;
+				int menge;
+				String kategorie;
 				
+				try {
+					
+					 line = sc.nextLine();
+					
+					 werte = line.split("[|]");
 				
-				String name = werte[1];
-				int nr = Integer.valueOf(werte[0]);
-				double preis = Double.parseDouble(werte[2]);
-				int menge = Integer.parseInt(werte[3]);
-				String kategorie = werte[4];
-				
-				
+					 name = werte[1];
+					 nr = Integer.valueOf(werte[0]);
+					 preis = Double.parseDouble(werte[2]);
+					 menge = Integer.parseInt(werte[3]);
+					 kategorie = werte[4];
+					 
+				}catch(Exception InvalidFormat) {
+					System.out.println("Fehler beim einlesen. Stellen sie sicher, dass die Datei das richtige Format besitzt.");
+					return false;
+				}
+
 				if(this.artikelExists(name)) {
 					this.mengeErhoehen(name, menge);
-					
-					
+
 				}else {
-				
 					Artikel k = new Artikel(name, nr, preis, menge, kategorie);
 					bestand.put(Integer.valueOf(werte[0]), k);
 				}
-				
+
 			}
-			
-			
-			
+		
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
-			
-			
-		
-		
+		return true;
 	}
 	
 	public boolean mengeErhoehen(int nr, int anzahl) {
