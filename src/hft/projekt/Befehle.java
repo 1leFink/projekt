@@ -122,7 +122,6 @@ public class Befehle {
 			return false;
 		}
 	
-		
 		boolean flag = true;
 		List<Artikel> artikel = new ArrayList<Artikel>();
 		Scanner sc = new Scanner(System.in);
@@ -130,7 +129,6 @@ public class Befehle {
 		System.out.println("-----------------------------------Auftrag----------------------------------");
 		
 		while(flag) {
-			
 			
 			System.out.println("Artikelname: ");
 			String name = sc.next();
@@ -303,7 +301,7 @@ public class Befehle {
 		if(kunde != null) {
 			kunde.displayInfo();			
 		}else {
-			System.out.println("bitte versuchen sie es erneut");
+			System.out.println("Bitte versuchen sie es erneut");
 		}
 
 	

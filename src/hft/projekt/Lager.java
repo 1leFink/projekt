@@ -114,8 +114,10 @@ public class Lager implements Serializable{
 			if(k.getArtikelName().equals(name) && k.getMenge() - anzahl > 0) {
 				k.setMenge(k.getMenge() - anzahl);
 				return true;
-				
-			}	
+			}else if(k.getArtikelName().equals(name) && k.getMenge() - anzahl == 0) {
+				bestand.remove(k.getArtikelNr());
+				return true;
+			}
 		}
 		
 		System.out.println("Die angeforderte Menge überschreitet den Vorrat an Artikeln. "  );
