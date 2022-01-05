@@ -393,9 +393,9 @@ public class Befehle {
 			System.out.println("\n\n\n");
 			System.out.println("--1-- Navigation");
 			System.out.println("Die Anwendung wird durch Befehle gesteuert, welche man in der Kommandozeile eingeben muss.");
-			System.out.println("Parameter sind extra Anweisungen die hinter einem Befehl mit Leerzeichen separiert hinzugefügt werden können.");
-			System.out.println("Als Hilfe dient der Kommand 'help' der eine Liste der verfügbaren Befehle anzeigt.");
-			System.out.println("Geben sie den Befehl 'help' ein.");
+			System.out.println("Parameter sind extra Anweisungen die hinter einem Befehl, mit Leerzeichen separiert, hinzugefügt werden können.");
+			System.out.println("Als Hilfe dient der Befehl 'help' der eine Liste der verfuegbaren Befehle anzeigt.");
+			System.out.println("Geben sie den Befehl 'help' ein. \n");
 			
 			boolean correct = false;
 			while(correct == false) {
@@ -403,7 +403,7 @@ public class Befehle {
 					correct = true;
 					help();
 				}else {
-					System.out.println("Es scheint als wurde der befehl falsch geschrieben. Versuche es erneut");
+					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
 				}
 			}
 			
@@ -435,12 +435,12 @@ public class Befehle {
 					
 					addKunde(parameter);
 					count++;
-					System.out.println(count + "/3 Kunden hinzugefügt!");
+					System.out.println(count + "/3 Kunden hinzugefuegt!");
 					if(count == 3) {
 						correct3 = true;
 					}
 				}else {
-					System.out.println("Es scheint als wurde der befehl falsch geschrieben. Versuche es erneut");
+					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
 				}
 			}
 			System.out.println("Gut gemacht! geben sie sie nun die Kundenliste erneut aus.");
@@ -451,7 +451,7 @@ public class Befehle {
 					correct4 = true;
 					listKunden(new ArrayList<String>());
 				}else {
-					System.out.println("Es scheint als wurde der befehl falsch geschrieben. Versuche es erneut");
+					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut");
 				}
 			}
 			
@@ -469,12 +469,12 @@ public class Befehle {
 					listKunden(parameter);
 					correct5 = true;
 				}else {
-					System.out.println("Es scheint als wurde der befehl falsch geschrieben. Versuche es erneut");
+					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es Erneut");
 				}
 			}
 		
 			System.out.println("Super! Damit verstehen sie die grundlegende Funktionsweise der Anwendung.");
-			System.out.println("Benutzen sie den befehl 'help' wenn sie weitere Hilfe brauchen.");
+			System.out.println("Benutzen sie den Befehl 'help' wenn sie weitere Hilfe brauchen.");
 		}
 		
 	}

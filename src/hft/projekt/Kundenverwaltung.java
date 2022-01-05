@@ -32,7 +32,7 @@ public class Kundenverwaltung implements Serializable{
 
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
-		System.out.println("Kunde '" + k.name + "' wurde hinzugefügt");
+		System.out.println("Kunde '" + k.name + "' wurde hinzugefï¿½gt");
 	}
 
 	
@@ -102,10 +102,7 @@ public void kundeEntfernen(String kundenname) {
 		System.out.println("---------------------------Kunden---------------------------------");
 		System.out.printf("%-15s%-15s%-15s%15s%n%n", "Name", "Nr.", "Beitrittsdatum", "Auftraege");
 		for(Kunde k : kunden.values()) {
-			int aufträge;
-			
-			
-			
+					
 			System.out.printf("%-15s%-15s%-15s%15d%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString(), k.getAuftraege().size());
 			
 			
