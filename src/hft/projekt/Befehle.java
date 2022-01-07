@@ -319,8 +319,24 @@ public class Befehle {
 		k.kundeHinzufuegen(kunde);
 		Speicherverwaltung.saveKundenverwaltung(k);
 		
+	
 		
 		
+	}
+	
+	public static boolean addKundetut(List<String> parameter) {
+		
+		if(parameter.isEmpty()){
+			System.out.println("Fehlende Parameter für 'addKunde'");
+			return false;
+			
+		}
+		
+		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+		Kunde kunde = new Kunde(parameter.get(0));
+		k.kundeHinzufuegen(kunde);
+		Speicherverwaltung.saveKundenverwaltung(k);
+		return true;
 	}
 	
 	public static void rmKunde(List<String> parameter) {
@@ -428,6 +444,7 @@ public class Befehle {
 			System.out.println("Fügen sie mithilfe von 'addKunde' und anschließend einen Namen als Parameter, 3 neue Kunden hinzu.");
 			
 			boolean correct3 = false;
+			
 			int count = 0;
 			while(correct3 == false) {
 				
@@ -439,12 +456,14 @@ public class Befehle {
 				
 				if(answer[0].equals("addKunde")) {
 					
-					addKunde(parameter);
-					count++;
-					System.out.println(count + "/3 Kunden hinzugefuegt!");
-					if(count == 3) {
-						correct3 = true;
+					if(addKundetut(parameter)) {
+						count++;
+						System.out.println(count + "/3 Kunden hinzugefuegt!");
+						if(count == 3) {
+							correct3 = true;
+						}
 					}
+					
 					
 				}else {
 						System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
