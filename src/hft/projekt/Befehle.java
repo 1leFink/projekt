@@ -123,6 +123,7 @@ public class Befehle {
 		}
 	
 		boolean flag = true;
+		
 		List<Artikel> artikel = new ArrayList<Artikel>();
 		Scanner sc = new Scanner(System.in);
 		Lager l = Speicherverwaltung.loadLager();
@@ -130,29 +131,51 @@ public class Befehle {
 		
 		while(flag) {
 			
-			System.out.println("Artikelname: ");
-			String name = sc.next();
 			
-			if(l.artikelExists(name)) {
-				Artikel k = l.getArtikelByName(name);	
-			}else {
-				System.out.println("Artikel nicht gefunden versuche es erneut");
-				return false;
+			//Erst weitermachen wenn ein Artikel gefunden wurde/ Artikel angegeben wird der im Lager existiert
+			System.out.println("Artikelname: ");
+			String name = null;
+			boolean found = false;
+			while(found == false) {
+				
+				 name = sc.next();
+				
+				 //Vorgang abrechen falls quit eingegeben wird
+				 if(name.equals("quit")) {
+					 return false;
+				 }
+				 
+				if(l.artikelExists(name)) {
+					Artikel k = l.getArtikelByName(name);	
+					found = true;
+				}else {
+					System.out.println("Artikel nicht gefunden versuche es erneut");
+				
+				}
 			}
 			
-			System.out.println("Menge: ");
-			String smenge = sc.next();
+		
 			
-			//überprüfen ob es sich um eine Zahl handelt
-			int menge;
+			System.out.println("Menge: ");
+		
+			
+			boolean m = false;
+			int menge = 0;
+			
+			while(m == false) {
+				String smenge = sc.next();				
+				if(smenge.equals("quit")) {
+					return false;
+				}
+				//überprüfen ob es sich um eine Zahl handelt	
 			try {
 				menge = Integer.parseInt(smenge);
+				m = true;
 			}
 			catch (Exception e) {
 				System.out.println("Bitte geben sie eine Menge an");
-				return false;
 			}
-			
+		}
 			//Preis des Artikels berechnen
 			double preis = l.getArtikelByName(name).getPreis() * menge;
 			
@@ -179,7 +202,9 @@ public class Befehle {
 			System.out.printf("%-15s %-15s %-15s %n%n", "Artikelname" , "Menge", "Preis");
 			
 			for(Artikel k : artikel) {
-				System.out.printf("%-15s %-15s %-15.2f\u20ac", k.getArtikelName(), k.getMenge(), k.getPreis());
+				int total = l.getArtikelByName(k.getArtikelName()).getMenge();
+				String aufmenge = k.getMenge() + "/" + total;
+				System.out.printf("%-15s %-15s %-15.2f\u20ac", k.getArtikelName(), aufmenge, k.getPreis());
 				System.out.println();
 			}
 			System.out.println("--------------------------------------------------");
