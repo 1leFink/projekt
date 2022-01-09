@@ -107,11 +107,20 @@ public class Befehle {
 		//bestellen (Kundenname/Kundennr)
 		
 		Kundenverwaltung kv = Speicherverwaltung.loadKundenverwaltung();
+		Lager l = Speicherverwaltung.loadLager();
 		Kunde kunde = null;
+		
 		if(param.isEmpty()) {
 			System.out.println("Fehlende Parameter für 'bestellen'");
 			return false;
 		}
+		
+		if(l.getBestand().size() == 0) {
+			System.out.println("Bestellung kann nicht aufgenommen werden: Das Lager ist leer");
+			return false;
+		}
+				
+		
 		
 		if(param.size() == 1) {
 			kunde = kv.getKundeByName(param.get(0));
@@ -126,7 +135,7 @@ public class Befehle {
 		
 		List<Artikel> artikel = new ArrayList<Artikel>();
 		Scanner sc = new Scanner(System.in);
-		Lager l = Speicherverwaltung.loadLager();
+		
 		System.out.println("-----------------------------------Auftrag----------------------------------");
 		
 		while(flag) {

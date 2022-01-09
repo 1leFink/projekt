@@ -6,11 +6,9 @@ public enum Misc implements Serializable{
 
 	VERSION("1.0"),
 	NAME("projekt"),
-	KSAVE_PATH("C:\\Users\\Leon\\Desktop\\save\\Kundenverwaltung.txt"),
-	LSAVE_PATH("C:\\Users\\Leon\\Desktop\\save\\Lager.txt"),
+	KSAVE_PATH("/Users/" + System.getProperty("user.name") + "/Documents/Kundenverwaltung.txt"),
+	LSAVE_PATH("/Users/" + System.getProperty("user.name") + "/Documents/Lager.txt"),
 	READ_PATH("bestand.txt"),
-	//C:\\Users\\Leon\\Desktop\\save\\names.txt
-	//C:\\Users\\Leon\\Desktop\\save\\bestand.txt
 	NAMES_PATH("names.txt"),
 	//SAVE_PATH("C:\\Users\\flova\\Desktop\\save\\Kundenverwaltung.txt")
 	

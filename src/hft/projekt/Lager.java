@@ -120,7 +120,7 @@ public class Lager implements Serializable{
 			}
 		}
 		
-		System.out.println("Die angeforderte Menge überschreitet den Vorrat an Artikeln. "  );
+		System.out.println("Die angeforderte Menge ï¿½berschreitet den Vorrat an Artikeln. "  );
 		return false;
 	}
 	
@@ -160,6 +160,14 @@ public class Lager implements Serializable{
 		
 		}
 		return null;
+	}
+
+	public HashMap<Integer, Artikel> getBestand() {
+		return bestand;
+	}
+
+	public void setBestand(HashMap<Integer, Artikel> bestand) {
+		this.bestand = bestand;
 	}
 	
 	
