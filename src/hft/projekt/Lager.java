@@ -97,6 +97,35 @@ public class Lager implements Serializable{
 		
 	}
 	
+	
+	public boolean artikelEntfernen(String name) {
+		
+		
+			for(Artikel k : bestand.values()) {
+				if(k.getArtikelName().equals(name)) {
+					bestand.remove(k.getArtikelNr());
+					return true;
+				}
+			}	
+		System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden.");
+		return false;
+	}
+	
+	public boolean artikelEntfernen(int artikelnr) {
+	
+		for(int nr : bestand.keySet()) {
+			if(nr == artikelnr){
+				bestand.remove(nr);
+				return true;
+			}
+		}	
+	System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden.");
+	return false;
+}
+	
+
+	
+	
 	public boolean mengeErhoehen(String name, int anzahl) {
 		
 		for(Artikel k : bestand.values()) {
@@ -107,6 +136,8 @@ public class Lager implements Serializable{
 		}
 		return false;
 	}
+	
+
 	
 	public boolean mengeReduzieren(String name, int anzahl) {
 		
@@ -145,8 +176,19 @@ public class Lager implements Serializable{
 		return false;
 	}
 	
+	public boolean artikelExists(int artikelnr) {
+		for(int nr : bestand.keySet()) {
+			if(nr == artikelnr) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
-	public Artikel getArtikelByName(String name) {
+	
+	public Artikel getArtikel(String name) {
+
+		System.out.println("artikel durch name: " + name) ;
 		
 		boolean found = false;
 		
@@ -157,10 +199,26 @@ public class Lager implements Serializable{
 		}
 		if(found == false) {
 			System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden");
-		
 		}
 		return null;
 	}
+	
+public Artikel getArtikel(int artikelnr) {
+		
+		boolean found = false;
+		
+		for(int nr : bestand.keySet()) {
+			if(nr == artikelnr) {
+				return bestand.get(nr);
+			}
+		}
+		if(found == false) {
+			System.out.println("Operation nicht erfolgreich: Artikel konnte nicht gefunden werden");
+		}
+		return null;
+	}
+	
+	
 
 	public HashMap<Integer, Artikel> getBestand() {
 		return bestand;

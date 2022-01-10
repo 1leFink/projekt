@@ -69,13 +69,73 @@ public class Befehle {
 			case "readScript":
 				readScript(param);
 				break;
+			case "rma":
+				removeArtikel(param);
+				break;
 			default:
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");		
 		}
 		Projekt.run();
 	}
 	
+	private static boolean removeArtikel(List<String> param) {
+		
+		if(param.isEmpty()) {
+			System.out.println("Fehlende Parameter für 'rma'");
+			return false;
+		}
 
+		Lager l = Speicherverwaltung.loadLager();
+		
+		String gelöscht = "";
+		for(int i = 0; i<param.size(); i++) {
+			
+			String parameter = "";
+			Integer nr = null;
+			try {
+				nr = Integer.parseInt(param.get(i));
+			}catch (Exception e){
+				//es handelt sich nicht um eine nummer
+				parameter = param.get(i);
+			}
+			
+			//eine Variable ist immer inititalisiert
+			if(parameter.isBlank()) {
+				
+				if(l.artikelExists(nr)){
+					Artikel k = l.getArtikel(nr);
+					gelöscht += "'" + k.getArtikelName() + "', "; 
+					l.artikelEntfernen(nr);
+				}else {
+					System.out.println("Operation nicht erfolgreich: Artikel existiert nicht");
+					return false;
+				}
+				
+			}else {
+				
+				if(l.artikelExists(parameter)){
+					Artikel k = l.getArtikel(parameter);
+					gelöscht += "'" + k.getArtikelName() + "', "; 
+					l.artikelEntfernen(parameter);
+				}else {
+					System.out.println("Operation nicht erfolgreich: Artikel existiert nicht");
+					return false;
+				}
+			
+				
+			}
+
+		}
+		
+		if(param.size() == 1) {
+			System.out.println("Artikel " + gelöscht + " wurde entfernt.");
+		}else {
+			System.out.println("Artikel " + gelöscht + " wurden entfernt.");
+		}
+		Speicherverwaltung.saveLager(l);
+		return true;
+	}
+	
 
 	private static boolean  readScript(List<String> param) {
 		// TODO Auto-generated method stub
@@ -155,7 +215,7 @@ public class Befehle {
 				 }
 				 
 				if(l.artikelExists(name)) {
-					Artikel k = l.getArtikelByName(name);	
+					Artikel k = l.getArtikel(name);	
 					found = true;
 				}else {
 					System.out.println("Artikel nicht gefunden versuche es erneut");
@@ -186,7 +246,7 @@ public class Befehle {
 			}
 		}
 			//Preis des Artikels berechnen
-			double preis = l.getArtikelByName(name).getPreis() * menge;
+			double preis = l.getArtikel(name).getPreis() * menge;
 			
 			
 			//übeprüfe ob Artikel bereits im Auftrag enthalten ist
@@ -194,7 +254,7 @@ public class Befehle {
 			for(Artikel k : artikel) {
 				if(k.getArtikelName().equals(name)) {
 					k.setMenge(k.getMenge() + menge);
-					k.setPreis(k.getPreis() + l.getArtikelByName(name).getPreis() * menge);
+					k.setPreis(k.getPreis() + l.getArtikel(name).getPreis() * menge);
 					duplicate = true;
 				}
 			}
@@ -211,7 +271,7 @@ public class Befehle {
 			System.out.printf("%-15s %-15s %-15s %n%n", "Artikelname" , "Menge", "Preis");
 			
 			for(Artikel k : artikel) {
-				int total = l.getArtikelByName(k.getArtikelName()).getMenge();
+				int total = l.getArtikel(k.getArtikelName()).getMenge();
 				String aufmenge = k.getMenge() + "/" + total;
 				System.out.printf("%-15s %-15s %-15.2f\u20ac", k.getArtikelName(), aufmenge, k.getPreis());
 				System.out.println();
