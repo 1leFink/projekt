@@ -316,7 +316,7 @@ public class Befehle {
 
 	private static void help() {
 		
-		System.out.println("------------------------------------------------------------------------------------------Befehle--------------------------------------------------------------------------------------------------");
+		System.out.println("------------------------------------------------------------------------------------------Befehle--------------------------------------------------------------------------------------------------\n");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n%n", "Befehl", "Parameter", "erw. Parameter", "Beschreibung", "Beispiele");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "infoKunde", "Kundenname, Kundennr.", "", "Gibt informationen über den Kunden an.", "'infoKunde Max', 'infoKunde 12345'");
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "addKunde", "Kundenname", "", "Erstellt einen Kunden mit angegebenen Namen.", "'addKunde Max'");
@@ -326,7 +326,7 @@ public class Befehle {
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "tutorial", "", "", "Interaktive Einfuerung zur Bedienung der Anwendung.", "" );
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "bestellen", "Kundenname", "", "Erstellt einen Auftrag mit übergebenen Artikeln", "'bestellen Max'" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'" );
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'\n" );
 		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 		//		
 //		System.out.println("infoKunde (name/nr) \t - Gibt Informationen über den Kunden an.");
