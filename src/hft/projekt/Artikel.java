@@ -1,6 +1,7 @@
 package hft.projekt;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public class Artikel implements Serializable{
 	
@@ -69,7 +70,50 @@ public class Artikel implements Serializable{
 		this.kategorie = kategorie;
 	}
 	
-	
 
+	public static Comparator<Artikel> compareByName(){
+		return new Comparator<Artikel>() {
+			@Override
+			public int compare(Artikel k1,Artikel k2) {
+				return(k1.artikelName.compareTo(k2.artikelName));
+			}
+		};
+	}
+	
+	public static Comparator<Artikel> compareByNr(){
+		return new Comparator<Artikel>() {
+			@Override
+			public int compare(Artikel k1,Artikel k2) {
+				return(k1.artikelNr- k2.artikelNr);
+			}
+		};
+	}
+	public static Comparator<Artikel> compareByPreis(){
+		return new Comparator<Artikel>() {
+			@Override
+			public int compare(Artikel k1,Artikel k2) {
+				return (int) (k1.preis - k2.preis);
+			}
+		};
+	}
+	
+	public static Comparator<Artikel> compareByMenge(){
+		return new Comparator<Artikel>() {
+			@Override
+			public int compare(Artikel k1,Artikel k2) {
+				return(k1.menge-k2.menge);
+			}
+		};
+	}
+
+	public static Comparator<Artikel> compareByKategorie(){
+		return new Comparator<Artikel>() {
+			@Override
+			public int compare(Artikel k1,Artikel k2) {
+				return(k1.kategorie.compareTo(k2.kategorie));
+			}
+		};
+	}
+	
 	
 }

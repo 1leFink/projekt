@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -60,13 +61,17 @@ public class Lager implements Serializable{
 					 menge = Integer.parseInt(werte[3]);
 					 kategorie = werte[4];
 					 
+					 if(nr < 0 || preis < 0 || menge < 0) {
+						 throw new Exception();
+					 }
+					 
 				}catch(Exception InvalidFormat) {
 					System.out.println("Fehler beim einlesen. Stellen sie sicher, dass die Datei das richtige Format besitzt.");
 					return false;
 				}
 
-				if(this.artikelExists(name)) {
-					this.mengeErhoehen(name, menge);
+				if(artikelExists(name)) {
+					mengeErhoehen(name, menge);
 
 				}else {
 					Artikel k = new Artikel(name, nr, preis, menge, kategorie);
@@ -187,8 +192,6 @@ public class Lager implements Serializable{
 	
 	
 	public Artikel getArtikel(String name) {
-
-		System.out.println("artikel durch name: " + name) ;
 		
 		boolean found = false;
 		
@@ -227,7 +230,7 @@ public Artikel getArtikel(int artikelnr) {
 	public void setBestand(HashMap<Integer, Artikel> bestand) {
 		this.bestand = bestand;
 	}
-	
+
 	
 	
 }

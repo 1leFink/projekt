@@ -1,3 +1,3 @@
 2|Banane|0.99|20|Lebensmittel
-4|Apfe|0.49|100|Lebensmittel
+4|Apfel|0.49|100|Lebensmittel
 5|Klopapier|3.99|30|Haushalt

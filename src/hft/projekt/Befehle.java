@@ -18,6 +18,8 @@ public class Befehle {
 	
 	public static void befehlEinlesen() {
 		
+		System.out.println("Fuer eine liste der befehle geben sie 'help' ein. Um das Program zu schliessen, geben Sie 'quit' ein.");
+		
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
 		Scanner sc = new Scanner(System.in);
@@ -78,6 +80,7 @@ public class Befehle {
 		Projekt.run();
 	}
 	
+	
 	private static boolean removeArtikel(List<String> param) {
 		
 		if(param.isEmpty()) {
@@ -88,10 +91,11 @@ public class Befehle {
 		Lager l = Speicherverwaltung.loadLager();
 		
 		String gelöscht = "";
+		
 		for(int i = 0; i<param.size(); i++) {
-			
 			String parameter = "";
 			Integer nr = null;
+			
 			try {
 				nr = Integer.parseInt(param.get(i));
 			}catch (Exception e){
@@ -125,6 +129,7 @@ public class Befehle {
 				
 			}
 
+			
 		}
 		
 		if(param.size() == 1) {
@@ -132,6 +137,7 @@ public class Befehle {
 		}else {
 			System.out.println("Artikel " + gelöscht + " wurden entfernt.");
 		}
+		
 		Speicherverwaltung.saveLager(l);
 		return true;
 	}
@@ -180,8 +186,6 @@ public class Befehle {
 			return false;
 		}
 				
-		
-		
 		if(param.size() == 1) {
 			kunde = kv.getKundeByName(param.get(0));
 			}
@@ -228,10 +232,10 @@ public class Befehle {
 			System.out.println("Menge: ");
 		
 			
-			boolean m = false;
+			boolean mfound = false;
 			int menge = 0;
 			
-			while(m == false) {
+			while(mfound == false) {
 				String smenge = sc.next();				
 				if(smenge.equals("quit")) {
 					return false;
@@ -239,10 +243,15 @@ public class Befehle {
 				//überprüfen ob es sich um eine Zahl handelt	
 			try {
 				menge = Integer.parseInt(smenge);
-				m = true;
+				if(menge > 0) {
+					mfound = true;
+				}else {
+					System.out.println("Bitte geben sie eine ganzzahlige positive Menge an.");
+				}
+
 			}
 			catch (Exception e) {
-				System.out.println("Bitte geben sie eine Menge an");
+				System.out.println("Bitte geben sie eine Menge an.");
 			}
 		}
 			//Preis des Artikels berechnen
@@ -253,19 +262,35 @@ public class Befehle {
 			boolean duplicate = false;
 			for(Artikel k : artikel) {
 				if(k.getArtikelName().equals(name)) {
-					k.setMenge(k.getMenge() + menge);
-					k.setPreis(k.getPreis() + l.getArtikel(name).getPreis() * menge);
-					duplicate = true;
+					
+					duplicate = true;	
+					
+					if(k.getMenge() + menge <= l.getArtikel(name).getMenge()) {
+
+						k.setMenge(k.getMenge() + menge);
+						k.setPreis(k.getPreis() + l.getArtikel(name).getPreis() * menge);
+					
+						
+					}else {
+						
+						System.out.println("Die menge des angeforderten Artikels ist nicht verfuegbar. Artikel wurde nicht hinzugefuegt.");
+					}
 				}
 			}
 			//anderfalls neuen Artikel erstellen und zur Liste hinzufügen
 			if(duplicate == false) {
-				Artikel neu = new Artikel(name, 0, preis, menge, "");
-				artikel.add(neu);
+				
+				if(menge <= l.getArtikel(name).getMenge()){
+					Artikel neu = new Artikel(name, 0, preis, menge, "");
+					artikel.add(neu);
+				}else {
+
+					System.out.println("Die menge des angeforderten Artikels ist nicht verfuegbar. Artikel wurde nicht hinzugefuegt.");
+				}
+				
 			}
 			
-
-			
+			if(artikel.isEmpty() == false) {
 			//alle bisherigen Elemente des Auftrags drucken
 			System.out.println("----------------Auftrag--------------------------");
 			System.out.printf("%-15s %-15s %-15s %n%n", "Artikelname" , "Menge", "Preis");
@@ -277,6 +302,7 @@ public class Befehle {
 				System.out.println();
 			}
 			System.out.println("--------------------------------------------------");
+			
 			double gesamt = 0;
 			for(Artikel k : artikel) {
 				gesamt += k.getPreis();
@@ -285,13 +311,17 @@ public class Befehle {
 			System.out.println("--------------------------------------------------");
 			System.out.println();
 			
-		
 			
-			System.out.println("Möchten sie noch einen Artikel hinzüfügen? y/n");
+			
+			System.out.println("Moechten sie noch einen Artikel hinzufuegen? y/n");
+			
+			
 			
 			if(sc.next().equals("n")) {
 				flag = false;
 			}
+			
+			} //end if artikel.isempty
 			
 		}
 		//ende While schleife --> Auftrag kann abgeschickt werden
@@ -310,7 +340,6 @@ public class Befehle {
 	}
 	
 	private static void quit() {
-		// TODO Auto-generated method stub
 		System.exit(0);
 	}
 
@@ -510,9 +539,13 @@ public class Befehle {
 			
 			boolean correct = false;
 			while(correct == false) {
-				if(sc.next().equals("help")) {
+				String answer = sc.next();
+				if(answer.equals("help")) {
 					correct = true;
 					help();
+				
+					}else if(answer.equals("quit")) {
+						befehlEinlesen();
 				}else {
 					System.out.println("Es scheint als wurde der Befehl falsch geschrieben. Versuche es erneut.");
 				}
@@ -657,7 +690,7 @@ public static void befehlEinlesenScript(File f) {
 					readScript(param);
 					break;
 				default:
-					System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");		
+					//nothing
 			}
 			
 		}

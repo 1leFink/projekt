@@ -19,8 +19,7 @@ public class Projekt{
 			System.out.println(Misc.BANNER.getWert());
 			opened = true;
 
-		
-			System.out.println("Fuer eine liste der befehle geben sie 'help' ein. Um das Program zu schliessen, geben Sie 'quit' ein.");
+	
 
 		}
 		
