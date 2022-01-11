@@ -9,7 +9,7 @@ public enum Misc implements Serializable{
 	KSAVE_PATH("/Users/" + System.getProperty("user.name") + "/Documents/Kundenverwaltung.txt"),
 	LSAVE_PATH("/Users/" + System.getProperty("user.name") + "/Documents/Lager.txt"),
 	READ_PATH("bestand.txt"),
-	NAMES_PATH("names.txt"),
+	NAMES_PATH("./res/names.txt"),
 	//SAVE_PATH("C:\\Users\\flova\\Desktop\\save\\Kundenverwaltung.txt")
 	
 	BANNER("_____/\\\\\\\\\\\\\\\\\\\\\\____/\\\\\\_______________________________________________________________________________________________/\\\\\\___________/\\\\\\\\\\\\\\____        \r\n"

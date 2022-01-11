@@ -112,12 +112,11 @@ public void kundeEntfernen(String kundenname) {
 	
 	
 	//debug Methods / Test Methods
-	
-	//
 	public void fillKunden(){
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		try {
-			Scanner sc = new Scanner(new FileInputStream(Misc.NAMES_PATH.getWert()));
+
+			Scanner sc = new Scanner(new FileInputStream("names.txt"));			
 			
 			while(sc.hasNext()) {
 				Kunde kunde = new Kunde(sc.next());
