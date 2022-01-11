@@ -10,7 +10,6 @@ public class Projekt{
 		// TODO Auto-generated method stub
 		run();
 		
-		
 	}
 
 	public static void run() {
@@ -19,7 +18,7 @@ public class Projekt{
 			System.out.println(Misc.BANNER.getWert());
 			opened = true;
 
-	//s
+			System.out.println("Fuer eine liste der befehle geben sie 'help' ein. Um das Program zu schliessen, geben Sie 'quit' ein.");
 
 		}
 		

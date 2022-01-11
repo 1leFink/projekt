@@ -18,8 +18,6 @@ public class Befehle {
 	
 	public static void befehlEinlesen() {
 		
-		System.out.println("Fuer eine liste der befehle geben sie 'help' ein. Um das Program zu schliessen, geben Sie 'quit' ein.");
-		
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
 		Scanner sc = new Scanner(System.in);
@@ -74,7 +72,7 @@ public class Befehle {
 			case "rma":
 				removeArtikel(param);
 				break;
-			default:
+			default: 
 				System.out.println("Der Befehl '" + befehl + "' konnte nicht gefunden werden.");		
 		}
 		Projekt.run();
@@ -82,6 +80,8 @@ public class Befehle {
 	
 	
 	private static boolean removeArtikel(List<String> param) {
+		
+		
 		
 		if(param.isEmpty()) {
 			System.out.println("Fehlende Parameter für 'rma'");
