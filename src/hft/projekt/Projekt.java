@@ -19,7 +19,7 @@ public class Projekt{
 			System.out.println(Misc.BANNER.getWert());
 			opened = true;
 
-	
+	//s
 
 		}
 		

@@ -60,7 +60,7 @@ public class Lager implements Serializable{
 					 preis = Double.parseDouble(werte[2]);
 					 menge = Integer.parseInt(werte[3]);
 					 kategorie = werte[4];
-					 
+					 //s
 					 if(nr < 0 || preis < 0 || menge < 0) {
 						 throw new Exception();
 					 }

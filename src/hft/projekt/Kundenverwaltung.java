@@ -193,7 +193,7 @@ List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
 		for(Kunde k : map.values()) {
 			
 			System.out.printf("%-15s%-15s%-15s%15d%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString(), k.getAuftraege().size());
-				
+			//s	
 		}
 		System.out.println("------------------------------------------------------------------");
 	}

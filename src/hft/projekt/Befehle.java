@@ -335,7 +335,7 @@ public class Befehle {
 		Speicherverwaltung.saveKundenverwaltung(kv);
 		
 		return true;
-	
+	//s
 		
 	}
 	

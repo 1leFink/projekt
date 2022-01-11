@@ -92,7 +92,7 @@ public class Speicherverwaltung implements Serializable{
 	
 			e.printStackTrace();
 		}
-	
+	//s
 	}
 
 

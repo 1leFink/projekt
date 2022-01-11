@@ -114,6 +114,6 @@ public class Artikel implements Serializable{
 			}
 		};
 	}
-	
+//s
 	
 }

@@ -15,7 +15,7 @@ public class Rechnung {
 		this.gesamtpreis = gesamtpreisBerechnen();
 		this.rechnungsdatum = LocalDate.now();
 	}
-	
+	//s
 	public double gesamtpreisBerechnen() {
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Lager l = Speicherverwaltung.loadLager();

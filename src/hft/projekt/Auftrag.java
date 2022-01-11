@@ -30,7 +30,7 @@ public class Auftrag implements Serializable{
 //			
 //		}
 //	}
-	
+	//s
 
 
 	public void bestellen(List<Artikel> artikel) {
