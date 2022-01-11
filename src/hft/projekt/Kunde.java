@@ -96,6 +96,7 @@ public class Kunde implements Serializable{
 		
 	}
 	
+	//test2222
 
 	public int kundenNummerErstellen() {
 		Random rand = new Random();
