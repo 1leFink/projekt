@@ -13,11 +13,14 @@ public class Auftrag implements Serializable{
 	protected List<Artikel> artikelListe;
 	private Rechnung rechnung;
 	
-	public Auftrag() {
+	public Auftrag(List<Artikel> artikel) {
 		super();
 		this.auftragsdatum = LocalDate.now();
 		this.auftragsNr = auftragsNummerErstellen();
-		this.artikelListe = new ArrayList<Artikel>();
+		this.artikelListe = artikel;
+		
+		
+		
 	}
 	
 //	public void gesamtpreisBerechnen() {
@@ -28,6 +31,8 @@ public class Auftrag implements Serializable{
 //		}
 //	}
 	
+
+
 	public void bestellen(List<Artikel> artikel) {
 		Rechnung rechnung = new Rechnung(artikel);
 		

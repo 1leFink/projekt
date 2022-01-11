@@ -68,15 +68,15 @@ public class Kunde implements Serializable{
 	
 	public boolean bestellen(List<Artikel> artikel) {
 				
-		Auftrag auf = new Auftrag();
-		
-		for(Artikel k : artikel) {
-			auf.artikelListe.add(k);
-		}
-		
+//		Auftrag auf = new Auftrag();
+//		
+//		for(Artikel k : artikel) {
+//			auf.artikelListe.add(k);
+//		}
+//		
 		Lager l = Speicherverwaltung.loadLager();
 		
-		for(Artikel k : auf.artikelListe) {
+		for(Artikel k : artikel) {
 			
 			if(l.artikelExists(k.getArtikelName())) {
 				if(l.mengeReduzieren(k.getArtikelName(), k.getMenge()) == true){
@@ -89,6 +89,7 @@ public class Kunde implements Serializable{
 			}
 		}
 		
+		Auftrag auf = new Auftrag(artikel);
 		auftraege.put(auf.getAuftragsNr(), auf);
 		Speicherverwaltung.saveLager(l);
 		return true;
