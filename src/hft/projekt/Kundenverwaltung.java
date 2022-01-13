@@ -28,7 +28,8 @@ public class Kundenverwaltung implements Serializable{
 	public HashMap<Integer, Kunde> getKunden() {
 		return kunden;
 	}
-	
+
+		
 
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
