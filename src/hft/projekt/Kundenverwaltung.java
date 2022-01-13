@@ -172,6 +172,7 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 
+	//change
 	public void listKundenbyAuftraege() {
 		
 List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
