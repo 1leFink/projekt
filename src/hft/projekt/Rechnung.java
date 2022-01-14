@@ -17,8 +17,7 @@ public class Rechnung {
 	}
 	//s
 	public double gesamtpreisBerechnen() {
-		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		Lager l = Speicherverwaltung.loadLager();
+	
 		double i = 0;
 		for (int j = 0; j<artikel.size(); j++) {
 			i += artikel.get(j).getPreis();

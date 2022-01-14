@@ -3,9 +3,6 @@ package hft.projekt;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -81,7 +78,6 @@ public class Lager implements Serializable{
 			}
 		
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
 		}

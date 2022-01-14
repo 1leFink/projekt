@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 public class Kunde implements Serializable{
 

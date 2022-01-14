@@ -4,13 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 
@@ -36,7 +33,42 @@ public class Kundenverwaltung implements Serializable{
 		System.out.println("Kunde '" + k.name + "' wurde hinzugefuegt");
 	}
 
-	
+	public Kunde kundeBestimmen(String name){
+
+		Scanner sc = new Scanner(System.in);
+
+		HashMap<Integer, Kunde> all = new HashMap<>();
+		int count = 1;
+		for(Kunde k : kunden.values()){
+			if(k.getName().equals(name)){
+				all.put(count, k);
+				count++;
+			}
+		}
+		if(all.size() > 1){
+			System.out.println("Mehrere Kunden mit dem Name: " + name + " gefunden. Welchen Kunde wollen sie wählen?");
+		
+
+		System.out.println("---------------------------------------------------------------------------------");
+		for(int nr : all.keySet()){
+			System.out.printf("(%d) name: %s \t Kundennummer: %d %n", nr, all.get(nr).getName(), all.get(nr).getKundennr());
+		}
+
+		try{
+			int selection = Integer.parseInt(sc.next());
+			return all.get(selection);
+		}
+		catch (Exception notnr){
+			System.out.println("Fehler: Bitte benutzen sie die Nummer am anfang der Zeile.");
+			Befehle.befehlEinlesen();
+			return null;
+		}
+
+	}else{
+		return all.get(1);
+	}
+		
+	}
 	
 	public void kundeEntfernen(int kundennr) {
 		
@@ -70,6 +102,33 @@ public void kundeEntfernen(String kundenname) {
 		}
 	}
 	
+	public Kunde getKunde(int nr){
+		boolean found = false;
+		for(int i : kunden.keySet()) {
+			if(i == nr) {
+				found = true;
+				return kunden.get(i);
+			}
+		}
+		if(found == false) {
+			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
+		}
+		return null;
+	}
+
+	public Kunde getKunde(String name){
+		boolean found = false;
+		for(Kunde k : kunden.values()) {
+			if(k.getName().equals(name)) {
+				found = true;
+				return k;
+			}
+		}
+		if(found == false) {
+			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
+		}
+		return null;
+	}
 
 	public Kunde getKundeByNr(int nr) {
 		boolean found = false;
@@ -128,7 +187,6 @@ public void kundeEntfernen(String kundenname) {
 			sc.close();
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -30,13 +30,13 @@ public class Speicherverwaltung implements Serializable{
 			return k;
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null;
@@ -57,12 +57,12 @@ public class Speicherverwaltung implements Serializable{
 			objOut.close();
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			 
 			System.out.println("Kundenverwaltung konnte nicht gespeichert werden: Datei nicht gefunden");
 			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			 
 			System.out.println("Kundenverwaltung konnte nicht gespeichert werden: Fehler beim Lesen/Schreiben");
 	
 			e.printStackTrace();
@@ -82,17 +82,17 @@ public class Speicherverwaltung implements Serializable{
 			objOut.close();
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			 
 			System.out.println("Lager konnte nicht gespeichert werden: Datei nicht gefunden");
 			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			  
 			System.out.println("Lager konnte nicht gespeichert werden: Fehler beim Lesen/Schreiben");
 	
 			e.printStackTrace();
 		}
-	//s
+	
 	}
 
 
@@ -110,13 +110,13 @@ public class Speicherverwaltung implements Serializable{
 			return l;
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			  
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			 
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return null;
