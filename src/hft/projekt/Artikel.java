@@ -9,7 +9,6 @@ public class Artikel implements Serializable{
 	private int artikelNr;
 	private double preis;
 	private int menge;
-	private boolean verfuegbarkeit;
 	private String kategorie;
 	
 	public Artikel(String artikelName, int artikelNr, double preis,int menge, String kategorie) {
@@ -52,15 +51,6 @@ public class Artikel implements Serializable{
 	public void setMenge(int menge) {
 		this.menge = menge;
 	}
-
-	public boolean isVerfuegbarkeit() {
-		return verfuegbarkeit;
-	}
-
-	public void setVerfuegbarkeit(boolean verfuegbarkeit) {
-		this.verfuegbarkeit = verfuegbarkeit;
-	}
-
 
 	public String getKategorie() {
 		return kategorie;

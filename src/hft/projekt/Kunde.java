@@ -15,13 +15,13 @@ public class Kunde implements Serializable{
 	protected LocalDate beitrittsdatum;
 	protected HashMap<Integer, Auftrag> auftraege;
 	
+	//Kunstruktor: verlangt nur einen Namen für den Kunden
 	public Kunde(String name) {
 		super();
 		this.name = name;
 		this.kundennr = kundenNummerErstellen();
 		this.beitrittsdatum = LocalDate.now();
 		this.auftraege = new HashMap<Integer, Auftrag>();
-		
 		
 	}
 	public String getName() {
@@ -48,6 +48,9 @@ public class Kunde implements Serializable{
 	public void setBeitrittsdatum(LocalDate beitrittsdatum) {
 		this.beitrittsdatum = beitrittsdatum;
 	}
+
+	
+	//displayInf() gibt informationen über einen Kunden aus
 	public void displayInfo() {
 		String padded1 = String.format("%1$-20s", "Name:");
 		String padded2 = String.format("%1$-20s", "Kundennummer:");
@@ -65,18 +68,19 @@ public class Kunde implements Serializable{
 		System.out.println("---------------------------------------------------");
 	}
 	
+	/**
+	 * 
+	 * @param artikel, liste der Artikel die zu dem Auftrag gehören
+	 * @return {@code true} falls Artikel exisiteren und Auftrag erstellt werden kann
+	 */
+
 	public boolean bestellen(List<Artikel> artikel) {
-				
-//		Auftrag auf = new Auftrag();
-//		
-//		for(Artikel k : artikel) {
-//			auf.artikelListe.add(k);
-//		}
-//		
+			
 		Lager l = Speicherverwaltung.loadLager();
 		
 		for(Artikel k : artikel) {
 			
+			//Kontrolle ob Artikel existiert, Wenn true --> Menge des Artikels reduzieren, bei fehlern wird false zurueckgegeben
 			if(l.artikelExists(k.getArtikelName())) {
 				if(l.mengeReduzieren(k.getArtikelName(), k.getMenge()) == true){
 				}else {
@@ -88,36 +92,43 @@ public class Kunde implements Serializable{
 			}
 		}
 		
+		//Auftrag wird erstellt und dem Kunden hinzugefuegt
 		Auftrag auf = new Auftrag(artikel);
 		auftraege.put(auf.getAuftragsNr(), auf);
+
+		//Änderungen am Lager werden gespeichert und true zurueckgegeben
 		Speicherverwaltung.saveLager(l);
 		return true;
 		
 	}
-	
-	//tes
 
+	//kundenNummerErstellen() erstellt eine zufällige, für jeden Kunden individuelle Kundennummer
 	public int kundenNummerErstellen() {
 		Random rand = new Random();
 		int[] ziffern = {0,1,2,3,4,5,6,7,8,9};
+		
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		
+		//Block wird erneut ausgeführt wenn bereits ein Kunde mit der erstellten Kundennummer existiert
 		while(true) {
 		String num = "";
 		boolean duplicate = false;
 		
+		//erste Ziffer wird erstellt und darf nicht 0 sein
 		num = num + ziffern[rand.nextInt(9)+1];
+		//die restlichen 4 Ziffern werden zufällig ausgewählt und num angehängt
 		for(int i = 0; i<4; i++) {
 			int index = rand.nextInt(10);
 			num = num + ziffern[index];
 		}
+		//Kontrolle ob einer der Kunden bereits die Kundennummer besitzt, Wenn ja --> duplicate = true -> Schleife wiederholt sich
 		for(int i : k.getKunden().keySet()) {
 			if(i == Integer.parseInt(num)) {
 				duplicate = true;
 				
 			}
 		}
-		
+		//Wenn duplicate false geblieben ist, wird die generierte Nummer zurückgegeben
 		if(duplicate == false) {
 			return Integer.parseInt(num);	
 		}
@@ -125,6 +136,8 @@ public class Kunde implements Serializable{
 	
 	
 	}
+
+	//Alle Comperator zur Sortierung der Kunden mit dem Befehl 'listKunde'
 	
 	public static Comparator<Kunde> compareByName(){
 		return new Comparator<Kunde>() {

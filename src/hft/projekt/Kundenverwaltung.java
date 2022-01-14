@@ -26,17 +26,25 @@ public class Kundenverwaltung implements Serializable{
 		return kunden;
 	}
 
-		
-
+	/**
+	 * @param k, Kunde der zur Kundenverwaltung hinzugefuegt werden soll
+	 * Die Methode speichert den Kunden zusammen mit seiner Nummer in der HashMap kunden ab
+	 */
 	public void kundeHinzufuegen(Kunde k) {
 		kunden.put(k.getKundennr(), k);
 		System.out.println("Kunde '" + k.name + "' wurde hinzugefuegt");
 	}
 
+	/**
+	 * 
+	 * @param name, Kundenname des Kundens
+	 * @return Kunde der entweder anhand seines Namens gefunden oder anhand einer Auswahl gewählt wird
+	 */
 	public Kunde kundeBestimmen(String name){
 
 		Scanner sc = new Scanner(System.in);
 
+		//HashMap wird angelegt die Alle Kunden speichert anhand eines Indexes mit dem der Nutzer später die Auswahl treffen soll
 		HashMap<Integer, Kunde> all = new HashMap<>();
 		int count = 1;
 		for(Kunde k : kunden.values()){
@@ -45,15 +53,18 @@ public class Kundenverwaltung implements Serializable{
 				count++;
 			}
 		}
+		//Wenn mehr als ein Kunde gefunden wurde (all.size > 1) ist, alle Kunden mit dem Namen zur Auswahl präsentieren
 		if(all.size() > 1){
 			System.out.println("Mehrere Kunden mit dem Name: " + name + " gefunden. Welchen Kunde wollen sie wählen?");
 		
-
+		//Anzeigen der Kunden
 		System.out.println("---------------------------------------------------------------------------------");
 		for(int nr : all.keySet()){
 			System.out.printf("(%d) name: %s \t Kundennummer: %d %n", nr, all.get(nr).getName(), all.get(nr).getKundennr());
 		}
 
+		//Versuche aus der nächsten Zeile einen Integer wert zu bekommen. Nutzer soll den entsprechenden Kunden anhand von dessen Index auswählen
+		//Falls der Input keine Zahl ist kann keine Auswahl getroffen werden, die Auswahl wird abgebrochen
 		try{
 			int selection = Integer.parseInt(sc.next());
 			return all.get(selection);
@@ -64,15 +75,21 @@ public class Kundenverwaltung implements Serializable{
 			return null;
 		}
 
+	//Falls nur ein Kunde mit dem Namen gefunden wurde muss keine Auswahl getroffen werden --> sofort zurueckgeben
 	}else{
 		return all.get(1);
 	}
 		
 	}
 	
+	/**
+	 * 
+	 * @param kundennr, Nr des Kundens der entfernt werden soll
+	 */
 	public void kundeEntfernen(int kundennr) {
 		
 		boolean found = false;
+		//Sobald ein Kunde mit entsprechender Nummer gefunden wurde, diesen entfernen
 		for(int i : kunden.keySet()) {
 			if(i == kundennr) {
 				kunden.remove(i);
@@ -80,14 +97,21 @@ public class Kundenverwaltung implements Serializable{
 				
 			}
 		}
+		//falls kein Kunde gefunden wurde Fehlermeldung anzeigen
 		if(found == false) {
 			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
 		}
 	}
 	
+
+	/**
+	 * 
+	 * @param kundenname, Name des Kundens der entfernt werden soll
+	 */
 public void kundeEntfernen(String kundenname) {
 		
 		boolean found = false;
+		//Sobald ein Kunde mit entsprechendem Name gefunden wurde, diesen entfernen
 		for(Kunde k : kunden.values()) {
 			if(k.getName().equals(kundenname)) {
 				kunden.remove(k.getKundennr());
@@ -97,6 +121,7 @@ public void kundeEntfernen(String kundenname) {
 			}
 		
 		}
+		//falls kein Kunde gefunden wurde Fehlermeldung anzeigen
 		if(found == false) {
 			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
 		}
