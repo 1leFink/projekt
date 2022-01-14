@@ -504,6 +504,12 @@ public class Befehle {
 			return false;
 		}
 		
+		//Falls die Länge des Namens 15 Zeichen überschreitet sofort abbrechen
+		if(parameter.get(0).length() >15) {
+			System.out.println("Fehler: Der Name des Kundens darf maximal 15 Zeichen lang sein. Versuchen sie es erneut.");
+			return false;
+		}
+		
 		//Kundenverwaltung wird veränder --> Kundenverwaltung laden, Kunde hinzufügen und Speichern
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 		Kunde kunde = new Kunde(parameter.get(0));
@@ -511,8 +517,6 @@ public class Befehle {
 		Speicherverwaltung.saveKundenverwaltung(k);
 		return true;
 	
-		
-		
 	}
 	
 	/**

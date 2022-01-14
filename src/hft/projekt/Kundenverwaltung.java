@@ -159,6 +159,7 @@ public void kundeEntfernen(String kundenname) {
 	}
 
 	public void listKunden() {
+		
 		System.out.println("---------------------------Kunden---------------------------------");
 		System.out.printf("%-15s%-15s%-15s%15s%n%n", "Name", "Nr.", "Beitrittsdatum", "Auftraege");
 		for(Kunde k : kunden.values()) {
@@ -230,7 +231,16 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 
-	//change
+	public int getLongestName() {
+		int length = 1;
+		for(Kunde k : kunden.values()) {
+			if(k.getName().length() > length) {
+				length = k.getName().length();
+			}
+		}
+		return length;
+	}
+
 	public void listKundenbyAuftraege() {
 		
 List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
