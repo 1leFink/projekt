@@ -408,7 +408,9 @@ public class Befehle {
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "tutorial", "", "", "Interaktive Einfuerung zur Bedienung der Anwendung.", "" );
 		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "bestellen", "Kundenname", "", "Erstellt einen Auftrag mit übergebenen Artikeln", "'bestellen Max'" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'\n" );
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'" );
+		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n%n", "quit", "", "", "Beendet das Programm, oder einen Unterprozess.", " Wenn im Tutorial: quit --> zurück zu Befehlen" );
+
 		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}
 
@@ -563,6 +565,7 @@ public class Befehle {
 		
 		//Unterschiedung zwischen Kundennummer und Kundenname
 		try {
+		
 			Integer.parseInt(parameter.get(0));
 			Kunde kunde = k.getKunde(Integer.parseInt(parameter.get(0)));
 			
@@ -575,6 +578,7 @@ public class Befehle {
 		
 		}
 		catch(Exception e) {
+			
 			Kunde kunde = k.kundeBestimmen(parameter.get(0));
 			
 			//Kunde ist null wenn es kein Kunde mit dem Namen gibt

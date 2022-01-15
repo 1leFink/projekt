@@ -43,7 +43,7 @@ public class Kundenverwaltung implements Serializable{
 	public Kunde kundeBestimmen(String name){
 
 		Scanner sc = new Scanner(System.in);
-
+		
 		//HashMap wird angelegt die Alle Kunden speichert anhand eines Indexes mit dem der Nutzer später die Auswahl treffen soll
 		HashMap<Integer, Kunde> all = new HashMap<>();
 		int count = 1;
@@ -53,6 +53,7 @@ public class Kundenverwaltung implements Serializable{
 				count++;
 			}
 		}
+		System.out.println(all.size());
 		//Wenn mehr als ein Kunde gefunden wurde (all.size > 1) ist, alle Kunden mit dem Namen zur Auswahl präsentieren
 		if(all.size() > 1){
 			System.out.println("Mehrere Kunden mit dem Name: " + name + " gefunden. Welchen Kunde wollen sie wählen?");

@@ -16,7 +16,6 @@ public class Projekt{
 	 * Abschließend wird die methode 'befehleEinlesen()' in 'Befehle' aufgerufen und der Nutzer kann Kommandos eingeben.
 	 */
 	public static void run() {
-		
 		//Check ob das Programm die run() methode das erste mal seit dem letzen Start ausgeführt hat. Nur wenn das der Fall ist soll das Banner erneut angezeigt werden.
 		if(opened == false) {
 			System.out.println(Misc.BANNER.getWert());
