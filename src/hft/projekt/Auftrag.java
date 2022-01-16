@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class Auftrag implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	protected int auftragsNr;
 	protected LocalDate auftragsdatum;
 	protected List<Artikel> artikelListe;

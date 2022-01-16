@@ -477,7 +477,7 @@ public class Befehle {
 		//Unterscheidung ob eine Kundennummer oder Kundenname eingeben wird
 		try {
 			Integer.parseInt(parameter.get(0));
-			kunde = k.getKundeByNr(Integer.valueOf(parameter.get(0)));
+			kunde = k.getKunde(Integer.valueOf(parameter.get(0)));
 		}catch(Exception e){
 			//infoKunde wurde ein Namen uebergeben
 			 kunde = k.kundeBestimmen(parameter.get(0)); //--> Behandelt auch den Fall von mehreren Kunden mit dem selben Namen

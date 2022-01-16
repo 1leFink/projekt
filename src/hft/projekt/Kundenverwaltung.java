@@ -127,7 +127,13 @@ public void kundeEntfernen(String kundenname) {
 			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
 		}
 	}
-	
+
+
+	/** 
+	 * @param nr, Kundennummer des Kundes der zurueckgegeben werden soll
+	 * @return Kunde, Kunde mit passender Kundennummer
+	 * @return null, falls kein Kunde mit passender Kundennummer existiert
+	 */
 	public Kunde getKunde(int nr){
 		boolean found = false;
 		for(int i : kunden.keySet()) {
@@ -142,6 +148,11 @@ public void kundeEntfernen(String kundenname) {
 		return null;
 	}
 
+	/** 
+	 * @param name, Kundenname des Kundes der zurueckgegeben werden soll
+	 * @return Kunde, Kunde mit passenden Kundenname
+	 * @return null, falls kein Kunde mit passender Kundennummer existiert
+	 */
 	public Kunde getKunde(String name){
 		boolean found = false;
 		for(Kunde k : kunden.values()) {
@@ -156,6 +167,10 @@ public void kundeEntfernen(String kundenname) {
 		return null;
 	}
 
+
+	//Durch überladene Methoden nicht mehr gebraucht
+	
+	/*
 	public Kunde getKundeByNr(int nr) {
 		boolean found = false;
 		for(int i : kunden.keySet()) {
@@ -183,7 +198,9 @@ public void kundeEntfernen(String kundenname) {
 		}
 		return null;
 	}
+	*/
 
+	//listKunden() gibt eine Übersicht 
 	public void listKunden() {
 		
 		System.out.println("---------------------------Kunden---------------------------------");
@@ -198,33 +215,48 @@ public void kundeEntfernen(String kundenname) {
 	}
 	
 	
-	//debug Methods / Test Methods
+	//debug Methods / Test Method
+	//fillKunden() erstellt eine Vielzahl von Kunden anhand einer textdatei mit namen, zu demonstrationszwecken
 	public void fillKunden(){
+		
+		//Kundeverwaltung laden
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
+	
+		//Mögliche Fehler abfangen
 		try {
-
+			
+			//FileinputStream erzeugen und an Scanner übergeben
 			Scanner sc = new Scanner(new FileInputStream("names.txt"));			
 			
+			//Solange sc neue Zeilen lesen kann
 			while(sc.hasNext()) {
+				//Kunde wird erstellt annhand des Namens in der Zeile
 				Kunde kunde = new Kunde(sc.next());
+				//Kunde wird der Kundenverwaltung hinzugefügt
 				k.kundeHinzufuegen(kunde);
 			
 			}
-			
+			//sc schliessen
 			sc.close();
 			
+		//Exception Datei konnte nicht gefunden werden
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
+		//Kundenverwaltung speichern
 		Speicherverwaltung.saveKundenverwaltung(k);
 		
 	}
 	
+	//clear() entfernt alle Eintraege in der HashMap 'kunden'
 	public void clear() {
 		kunden.clear();
 	}
 
+	
+	
+	//listKundenByName() gibt eine eine Übersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Namen
 	public void listKundenByName() {
 		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
@@ -241,6 +273,7 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 
+	//listKundenByNr() gibt eine eine Übersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Nr
 	public void listKundenByNr() {
 		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
@@ -257,6 +290,10 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 
+	/**
+	 * 
+	 * @return int, Zeichenanzahl des Namens von dem Kunden mit dem laengsten Namen
+	 */
 	public int getLongestName() {
 		int length = 1;
 		for(Kunde k : kunden.values()) {
@@ -267,9 +304,11 @@ public void kundeEntfernen(String kundenname) {
 		return length;
 	}
 
+		
+	//listKundenByNr() gibt eine eine Uebersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Anzahl der Auftraege
 	public void listKundenbyAuftraege() {
 		
-List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
+		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
 		
 		Collections.sort(kHash, Kunde.compareByAuftraege());
 		
@@ -283,13 +322,16 @@ List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
 		
 	}
 	
+	/**
+	 * 
+	 * @param map, HashMap der Kunden die ausgegeben werden soll. (gibt eine übersichtliche Liste der HashMap eintreage aus)
+	 */
 	public void printSortedMap(HashMap<Integer, Kunde> map) {
 		System.out.println("----------------------------Kunden--------------------------------");
 		System.out.printf("%-15s%-15s%-15s%15s%n%n", "Name", "Nr.", "Beitrittsdatum", "Auftraege");
 		for(Kunde k : map.values()) {
 			
 			System.out.printf("%-15s%-15s%-15s%15d%n", k.getName(), Integer.toString(k.getKundennr()), k.getBeitrittsdatum().toString(), k.getAuftraege().size());
-			//s	
 		}
 		System.out.println("------------------------------------------------------------------");
 	}
