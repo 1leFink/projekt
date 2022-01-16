@@ -5,26 +5,20 @@ import java.util.List;
 
 public class Rechnung {
 	
+	//Objektattribute
 	private double gesamtpreis;
 	private int rechnungsnr;
 	private LocalDate rechnungsdatum;
 	private List<Artikel> artikel;
 	
+	//Konstruktor
 	public Rechnung(List<Artikel> artikel) {
 		super();
 		this.gesamtpreis = gesamtpreisBerechnen();
 		this.rechnungsdatum = LocalDate.now();
 	}
-	//s
-	public double gesamtpreisBerechnen() {
-	
-		double i = 0;
-		for (int j = 0; j<artikel.size(); j++) {
-			i += artikel.get(j).getPreis();
-		}
-		return i;
-	}
 
+	//Getter / Setter
 	public double getGesamtpreis() {
 		return gesamtpreis;
 	}
@@ -48,7 +42,17 @@ public class Rechnung {
 	public void setArtikel(List<Artikel> artikel) {
 		this.artikel = artikel;
 	}
+
+	public double gesamtpreisBerechnen() {
 	
+		double i = 0;
+		for (int j = 0; j<artikel.size(); j++) {
+			i += artikel.get(j).getPreis();
+		}
+		return i;
+	}
+	
+	/*
 	String s1 = String.format("-------------------------------------------------------------------------");
 	String s21 = String.format("%1$-40s", " ____ _  _  __ ____ ____ ____ _  _");
 	String s22 = String.format("%1$-40s", "/ ___/ )( \\/  (  _ (  _ (  __( \\/ )");
@@ -68,7 +72,7 @@ public class Rechnung {
 	public String toString() {
 		return s1 + "\n" + s21 + s31 + s41 + s22 + s32 + s42 + s23 + s33 + s43 + s24 + s34 + s44 + "\n\n\n" + s1;
 	}
-	
+	*/
 	
 
 }

@@ -10,24 +10,19 @@ public class Auftrag implements Serializable{
 	protected int auftragsNr;
 	protected LocalDate auftragsdatum;
 	protected List<Artikel> artikelListe;
-	private Rechnung rechnung;
+	//private Rechnung rechnung; --> Rechnung kann noch implementiert werden
 	
 	public Auftrag(List<Artikel> artikel) {
 		super();
-		this.auftragsdatum = LocalDate.now();
-		this.auftragsNr = auftragsNummerErstellen();
+		this.auftragsdatum = LocalDate.now(); //--> jetziges Datum wird genommen
+		this.auftragsNr = auftragsNummerErstellen(); //--> individuelle Nummer wird erstellt
 		this.artikelListe = artikel;
 		
-		
-		
 	}
 
-	public void bestellen(List<Artikel> artikel) {
-		Rechnung rechnung = new Rechnung(artikel);
-		
-	}
-	
-
+//	public void bestellen(List<Artikel> artikel) {
+//		Rechnung rechnung = new Rechnung(artikel);
+//	}
 	
 	public int getAuftragsNr() {
 		return auftragsNr;
@@ -53,6 +48,10 @@ public class Auftrag implements Serializable{
 		this.artikelListe = artikelListe;
 	}
 
+	/**
+	 * @return int, zufällige Autragsnummer die indivduell ist
+	 * für genauere Beschreibung siehe kundenNummerErstellen in 'Kunde', gleiches Prinzip
+	 */
 	public int auftragsNummerErstellen() {
 		
 		Random rand = new Random();

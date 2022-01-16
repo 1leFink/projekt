@@ -5,12 +5,14 @@ import java.util.Comparator;
 
 public class Artikel implements Serializable{
 	
+	//Objektattribute
 	private String artikelName;
 	private int artikelNr;
 	private double preis;
 	private int menge;
 	private String kategorie;
 	
+	//Konstruktor
 	public Artikel(String artikelName, int artikelNr, double preis,int menge, String kategorie) {
 		super();
 		this.artikelName = artikelName;
@@ -61,6 +63,7 @@ public class Artikel implements Serializable{
 	}
 	
 
+	//Comperator fürs sortieren
 	public static Comparator<Artikel> compareByName(){
 		return new Comparator<Artikel>() {
 			@Override
