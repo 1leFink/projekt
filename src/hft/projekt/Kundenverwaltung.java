@@ -53,7 +53,11 @@ public class Kundenverwaltung implements Serializable{
 				count++;
 			}
 		}
-		System.out.println(all.size());
+
+		if(all.isEmpty()){
+			System.out.println("Operation nicht erfolgreich: Kunde konnte nicht gefunden werden");
+		}
+
 		//Wenn mehr als ein Kunde gefunden wurde (all.size > 1) ist, alle Kunden mit dem Namen zur Auswahl prÃ¤sentieren
 		if(all.size() > 1){
 			System.out.println("Mehrere Kunden mit dem Name: " + name + " gefunden. Welchen Kunde wollen sie wÃ¤hlen?");
@@ -168,7 +172,7 @@ public void kundeEntfernen(String kundenname) {
 	}
 
 
-	//Durch überladene Methoden nicht mehr gebraucht
+	//Durch ï¿½berladene Methoden nicht mehr gebraucht
 	
 	/*
 	public Kunde getKundeByNr(int nr) {
@@ -200,7 +204,7 @@ public void kundeEntfernen(String kundenname) {
 	}
 	*/
 
-	//listKunden() gibt eine Übersicht 
+	//listKunden() gibt eine ï¿½bersicht 
 	public void listKunden() {
 		
 		System.out.println("---------------------------Kunden---------------------------------");
@@ -222,17 +226,17 @@ public void kundeEntfernen(String kundenname) {
 		//Kundeverwaltung laden
 		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
 	
-		//Mögliche Fehler abfangen
+		//Mï¿½gliche Fehler abfangen
 		try {
 			
-			//FileinputStream erzeugen und an Scanner übergeben
+			//FileinputStream erzeugen und an Scanner ï¿½bergeben
 			Scanner sc = new Scanner(new FileInputStream("names.txt"));			
 			
 			//Solange sc neue Zeilen lesen kann
 			while(sc.hasNext()) {
 				//Kunde wird erstellt annhand des Namens in der Zeile
 				Kunde kunde = new Kunde(sc.next());
-				//Kunde wird der Kundenverwaltung hinzugefügt
+				//Kunde wird der Kundenverwaltung hinzugefï¿½gt
 				k.kundeHinzufuegen(kunde);
 			
 			}
@@ -256,7 +260,7 @@ public void kundeEntfernen(String kundenname) {
 
 	
 	
-	//listKundenByName() gibt eine eine Übersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Namen
+	//listKundenByName() gibt eine eine ï¿½bersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Namen
 	public void listKundenByName() {
 		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
@@ -273,7 +277,7 @@ public void kundeEntfernen(String kundenname) {
 		
 	}
 
-	//listKundenByNr() gibt eine eine Übersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Nr
+	//listKundenByNr() gibt eine eine ï¿½bersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Nr
 	public void listKundenByNr() {
 		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
@@ -305,7 +309,7 @@ public void kundeEntfernen(String kundenname) {
 	}
 
 		
-	//listKundenByNr() gibt eine eine Uebersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Anzahl der Auftraege
+	//listKundenByAuftreage() gibt eine eine Uebersichtliche Liste der Kunden auf der Konsole aus, sortiert nach Anzahl der Auftraege
 	public void listKundenbyAuftraege() {
 		
 		List<Kunde> kHash = new ArrayList<Kunde>(kunden.values());
@@ -324,7 +328,7 @@ public void kundeEntfernen(String kundenname) {
 	
 	/**
 	 * 
-	 * @param map, HashMap der Kunden die ausgegeben werden soll. (gibt eine übersichtliche Liste der HashMap eintreage aus)
+	 * @param map, HashMap der Kunden die ausgegeben werden soll. (gibt eine ï¿½bersichtliche Liste der HashMap eintreage aus)
 	 */
 	public void printSortedMap(HashMap<Integer, Kunde> map) {
 		System.out.println("----------------------------Kunden--------------------------------");

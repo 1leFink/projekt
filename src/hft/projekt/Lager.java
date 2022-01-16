@@ -3,7 +3,11 @@ package hft.projekt;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class Lager implements Serializable{
@@ -297,5 +301,106 @@ public class Lager implements Serializable{
 		return null;
 	}
 
+	//listArtikelByName() gibt eine eine Uebersichtliche Liste der Artikel auf der Konsole aus, sortiert nach Name
+	public void listArtikelByName(){
+
+		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
+		
+		Collections.sort(artikel, Artikel.compareByName());
+
+		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>();
+		
+		for(Artikel k : artikel){
+			sortedMap.put(k.getArtikelNr(), k);
+		}
+		
+		lagerAnzeigenSorted(sortedMap);
+
+	}
+
+	//listArtikelByNr() gibt eine eine Uebersichtliche Liste der Artikel auf der Konsole aus, sortiert nach Nr
+	public void listArtikelByNr(){
+
+		
+		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
+		
+		Collections.sort(artikel, Artikel.compareByNr());
+
+		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>();
+		
+		for(Artikel k : artikel){
+			sortedMap.put(k.getArtikelNr(), k);
+		}
+		
+		lagerAnzeigenSorted(sortedMap);
+
+	}
+	//listArtikelByPreis() gibt eine eine Uebersichtliche Liste der Artikel auf der Konsole aus, sortiert nach Preis
+	public void listArtikelByPreis(){
+
+		
+		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
+		
+		Collections.sort(artikel, Artikel.compareByPreis());
+
+		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>(); 
+		
+		for(Artikel k : artikel){
+			sortedMap.put(k.getArtikelNr(), k);
+		}
+		
+		lagerAnzeigenSorted(sortedMap);
+
+	}
+	//listArtikelByMenge() gibt eine eine Uebersichtliche Liste der Artikel auf der Konsole aus, sortiert nach Menge
+	public void listArtikelByMenge(){
+
+		
+		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
+		
+		Collections.sort(artikel, Artikel.compareByName());
+
+		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>();
+		
+		for(Artikel k : artikel){
+			sortedMap.put(k.getArtikelNr(), k);
+		}
+		
+		lagerAnzeigenSorted(sortedMap);
+
+	}
+	//listArtikelByKategorie() gibt eine eine Uebersichtliche Liste der Artikel auf der Konsole aus, sortiert nach Kategorie
+	public void listArtikelByKategorie(){
+
+		
+		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
+		
+		Collections.sort(artikel, Artikel.compareByKategorie());
+
+		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>();
+		
+		for(Artikel k : artikel){
+			sortedMap.put(k.getArtikelNr(), k);
+		}
+		
+		lagerAnzeigenSorted(sortedMap);
+
+	}
+	
+	
+	
+		//lagerAnzeigenSorted() gibt eine Übersicht über alle Artikel im Lager aus, sortiert (falls sorteMap sortiert ist)
+		public void lagerAnzeigenSorted(HashMap<Integer, Artikel> sortedMap) {
+		
+			System.out.println("-------------------------------------LAGER----------------------------------------------");
+			System.out.printf("%-15s%-15s%-15s%-15s%-15s%n%n", "Name", "Nr.", "Preis", "Menge", "Kategorie");
+			for(Artikel k : sortedMap.values()) {
+				
+				System.out.printf("%-15s%-15s%-15s%-15s%-15s%n", k.getArtikelName(), Integer.toString(k.getArtikelNr()), k.getPreis() +"\u20AC", k.getMenge(), k.getKategorie());
+		
+			}
+			System.out.println("----------------------------------------------------------------------------------------");
+			
+		}
 	
 }

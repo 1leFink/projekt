@@ -51,7 +51,7 @@ public class Befehle {
 				fillKunden();
 				break;
 			case "listLager":
-				listLager();
+				listLager(param);
 				break;
 			case "readArtikel":
 				readArtikel();
@@ -214,8 +214,8 @@ public class Befehle {
 			return false;
 		}
 				
-		//Es wird nur ein Parameter verlangt
-		if(param.size() == 1) {
+	
+		
 
 
 			//entweder es wird eine Nummer übergeben mit der man den Kunde findet, oder einen Namen.
@@ -229,7 +229,7 @@ public class Befehle {
 				String name = param.get(0);
 				kunde = kv.kundeBestimmen(name); // Methode fängt den Fall für mehrere Kunden mit dem gleichen Namen ab.
 			}
-		}
+		
 	
 
 		//nicht Null wenn ein Kunde mit dem Namen/nr existiert
@@ -446,9 +446,24 @@ public class Befehle {
 	}
 
 	//listLager() ruft lagerAnzeigen() in der Klasse 'Lager' auf, die das Lager anzeigt.
-	private static void listLager() {
+	private static void listLager(List<String> param) {
 		Lager l = Speicherverwaltung.loadLager();
-		l.lagerAnzeigen();
+
+		if(param.contains("-name")){
+			l.listArtikelByName();
+		}else if(param.contains("-nr")){
+			l.listArtikelByNr();
+		}else if(param.contains("-preis")){
+			l.listArtikelByPreis();
+		}else if(param.contains("-menge")){
+			l.listArtikelByMenge();
+		}else if(param.contains("-Kategorie")){
+			l.listArtikelByKategorie();
+		}else{
+			l.lagerAnzeigen();
+		}
+
+		
 	}
 
 	//Debug method --> nicht in dokumentation von help enthalten
@@ -521,26 +536,6 @@ public class Befehle {
 	
 	}
 	
-	/**
-	 * 
-	 * @param parameter, Liste der Parameter --> verlangt einen Kundenname
-	 * @return {@code true} falls die Methode einen Kunden hinzufügt
-	 * Die Methode ist eine Abänderung der Methode 'addKunde'. Implementiert wurde sie usprünglich, als seperate Methode die nur im tutorial aufgerufen wird.
-	 */
-	public static boolean addKundetut(List<String> parameter) {
-		
-		//Falls keine Parameter vorhanden sofort abbrechen
-		if(parameter.isEmpty()){
-			System.out.println("Fehlende Parameter für 'addKunde'");
-			return false;
-		}
-		
-		Kundenverwaltung k = Speicherverwaltung.loadKundenverwaltung();
-		Kunde kunde = new Kunde(parameter.get(0));
-		k.kundeHinzufuegen(kunde);
-		Speicherverwaltung.saveKundenverwaltung(k);
-		return true;
-	}
 	
 	/**
 	 * 
@@ -569,12 +564,16 @@ public class Befehle {
 			Integer.parseInt(parameter.get(0));
 			Kunde kunde = k.getKunde(Integer.parseInt(parameter.get(0)));
 			
+			//Kunde ist null wenn es kein Kunde mit der Nr gibt
+			if(kunde != null){
+
 			System.out.println("Kunde "  + kunde.getName() + " wirklich loeschen? y/n");
 			if(sc.next().equals("y")) {
 				k.kundeEntfernen(Integer.valueOf(parameter.get(0)));
 				System.out.println("Kunde wurde entfernt. \n");
 				return true;
 			}
+		}
 		
 		}
 		catch(Exception e) {
@@ -690,7 +689,7 @@ public class Befehle {
 					parameter.add(answer[i]);
 				}
 				if(answer[0].equals("addKunde")) {	
-					if(addKundetut(parameter)) {
+					if(addKunde(parameter)) {
 						count++;
 						System.out.println(count + "/3 Kunden hinzugefuegt!");
 						if(count == 3) {
@@ -790,7 +789,7 @@ public static void befehlEinlesenScript(File f) {
 					fillKunden();
 					break;
 				case "listLager":
-					listLager();
+					listLager(param);
 					break;
 				case "readArtikel":
 					readArtikel();
