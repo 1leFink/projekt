@@ -117,7 +117,6 @@ public class Lager implements Serializable{
 
 
 	/**
-	 * 
 	 * @param nr, Artikelnummer des Artikels dessen Menge erhoeht werden soll
 	 * @param anzahl, Menge um die erhoeht werden soll
 	 * @return {@code true} falls ein Artikel mit der nr existiert und die Menge erhoeht werden konnte
@@ -133,11 +132,9 @@ public class Lager implements Serializable{
 		}
 		return false;
 		
-		
 	}
 
 	/**
-	 *
 	 * @param name, Name des Artikels dessen Menge erhoeht werden soll
 	 * @param anzahl, Menge um die erhoeht werden soll
 	 * @return {@code true} falls ein Artikel mit dem Name existiert und die Menge erhoeht werden konnte
@@ -154,7 +151,6 @@ public class Lager implements Serializable{
 	}
 
 	/**
-	 * 
 	 * @param name, Name des Artikels dessen Menge reduziert werden soll
 	 * @param anzahl, Menge um die reduziert werden soll
 	 * @return {@code true} falls ein Artikel mit dem Name existiert und die Menge reduziert werden konnte
@@ -177,7 +173,6 @@ public class Lager implements Serializable{
 	
 
 	/**
-	 * 
 	 * @param nr, Nr des Artikels dessen Menge reduziert werden soll
 	 * @param anzahl, Menge um die reduziert werden soll
 	 * @return {@code true} falls ein Artikel mit der Nr existiert und die Menge reduziert werden konnte
@@ -196,12 +191,10 @@ public class Lager implements Serializable{
 	
 	
 	/**
-	 * 
 	 * @param name, Name des Artikels der entfernt werden soll
  	 * @return {@code true} falls ein Artikel mit dem Namen existiert und dieser entfernt wurde.
 	 */
 	public boolean artikelEntfernen(String name) {
-		
 		
 			for(Artikel k : bestand.values()) {
 				if(k.getArtikelName().equals(name)) {
@@ -215,7 +208,6 @@ public class Lager implements Serializable{
 	}
 	
 	/**
-	 * 
 	 * @param artikelnr, nr des Artikels der entfernt werden soll
  	 * @return {@code true} falls ein Artikel mit der artikelnr existiert und dieser entfernt wurde
 	 */
@@ -233,7 +225,6 @@ public class Lager implements Serializable{
 	
 
 	/**
-	 * 
 	 * @param name, Name des Artikels auf den geprüft werden soll ob er im Lager existiert
 	 * @return {@code true} falls ein Artikel mit dem Name existiert
 	 */	
@@ -248,7 +239,6 @@ public class Lager implements Serializable{
 	
 	
 	/**
-	 * 
 	 * @param artikelnr, Artikelnr des Artikels auf den geprüft werden soll ob er im Lager existiert
 	 * @return {@code true} falls ein Artikel mit dem Name existiert
 	 */	
@@ -358,7 +348,7 @@ public class Lager implements Serializable{
 		
 		List<Artikel> artikel = new ArrayList<Artikel>(bestand.values());
 		
-		Collections.sort(artikel, Artikel.compareByName());
+		Collections.sort(artikel, Artikel.compareByMenge());
 
 		HashMap<Integer, Artikel> sortedMap = new LinkedHashMap<Integer, Artikel>();
 		

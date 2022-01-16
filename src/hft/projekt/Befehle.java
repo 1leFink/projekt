@@ -214,9 +214,7 @@ public class Befehle {
 			return false;
 		}
 				
-	
 		
-
 
 			//entweder es wird eine Nummer übergeben mit der man den Kunde findet, oder einen Namen.
 			try{
@@ -237,13 +235,16 @@ public class Befehle {
 			return false;
 		}
 	
+		ArrayList<String> sort = new ArrayList<String>();
+		sort.add("-name");
+		listLager(sort);
 
 		//flag wird benötigt um nächsten Teil mehrmals auszuführen
 		boolean flag = true;
 		List<Artikel> artikel = new ArrayList<Artikel>();
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("-----------------------------------Auftrag----------------------------------");
+		System.out.println("-------------------------------------AUFTRAG--------------------------------------------");
 		
 		//Solange flag true ist wird der block ausgeführt: Artikel werden zum Auftrag hinzugefügt
 		while(flag) {
@@ -343,7 +344,7 @@ public class Befehle {
 			//Auftragsuebersicht anzeigen, jedoch nur wenn die Artikelliste nicht leer ist
 			if(artikel.isEmpty() == false) {
 			//alle bisherigen Elemente des Auftrags drucken
-			System.out.println("----------------Auftrag--------------------------");
+			System.out.println("--------------------ÜBERSICHT-----------------------");
 			System.out.printf("%-15s %-15s %-15s %n%n", "Artikelname" , "Menge", "Preis");
 			
 			for(Artikel k : artikel) {
@@ -352,7 +353,7 @@ public class Befehle {
 				System.out.printf("%-15s %-15s %-15.2f\u20ac", k.getArtikelName(), aufmenge, k.getPreis());
 				System.out.println();
 			}
-			System.out.println("--------------------------------------------------");
+			System.out.println("----------------------------------------------------");
 			
 			//Gesamtpreis berechnen und anzeigen
 			double gesamt = 0;
@@ -360,7 +361,7 @@ public class Befehle {
 				gesamt += k.getPreis();
 			}
 			System.out.printf("%-15s %21.2f\u20ac%n", "Gesamt:", gesamt);
-			System.out.println("--------------------------------------------------");
+			System.out.println("----------------------------------------------------");
 			System.out.println();
 			
 			//Hinweis anzeigen
@@ -399,17 +400,18 @@ public class Befehle {
 	//help() zeigt eine Liste der Befehlen an.
 	private static void help() {
 		System.out.println("------------------------------------------------------------------------------------------Befehle--------------------------------------------------------------------------------------------------\n");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n%n", "Befehl", "Parameter", "erw. Parameter", "Beschreibung", "Beispiele");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "infoKunde", "Kundenname, Kundennr.", "", "Gibt informationen über den Kunden an.", "'infoKunde Max', 'infoKunde 12345'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "addKunde", "Kundenname", "", "Erstellt einen Kunden mit angegebenen Namen.", "'addKunde Max'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "rmKunde", "Kundenname, Kundennr." , "-all", "Löscht einen Kunden nach Bestätigung.", "'rmKunde Max', 'rmKunde 12345', 'rmKunde -all'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listKunden", "", "-name, -nr, -datum, -auft", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "listLager", "", "-name, -nr, -menge", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "tutorial", "", "", "Interaktive Einfuerung zur Bedienung der Anwendung.", "" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "bestellen", "Kundenname", "", "Erstellt einen Auftrag mit übergebenen Artikeln", "'bestellen Max'" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'" );
-		System.out.printf("%-30s%-30s%-30s%-60s%-30s%n%n", "quit", "", "", "Beendet das Programm, oder einen Unterprozess.", " Wenn im Tutorial: quit --> zurück zu Befehlen" );
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "Befehl", "Parameter", "erw. Parameter", "Beschreibung", "Beispiele");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n%n", "^^^^^^", "^^^^^^^^^", "^^^^^^^^^^^^^^", "^^^^^^^^^^^^", "^^^^^^^^^");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "infoKunde", "Kundenname, Kundennr.", "", "Gibt informationen über den Kunden an.", "'infoKunde Max', 'infoKunde 12345'");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "addKunde", "Kundenname", "", "Erstellt einen Kunden mit angegebenen Namen.", "'addKunde Max'");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "rmKunde", "Kundenname, Kundennr." , "-all", "Löscht einen Kunden nach Bestätigung.", "'rmKunde Max', 'rmKunde 12345', 'rmKunde -all'");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "listKunden", "", "-name, -nr, -auft", "Zeigt eine Liste der Kunden an, ggf. sortiert.", "'listKunden -name'");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "listLager", "", "-name, -nr, -menge, -preis, -kategorie", "Zeigt eine Liste der Artikel im Lager, ggf. sortiert.", "'listLager -nr'");
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "readArtikel", "", "", "Fügt den Inhalt von bestand.txt. ins Lager ein", "" );
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "tutorial", "", "", "Interaktive Einfuerung zur Bedienung der Anwendung.", "" );
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "bestellen", "Kundenname", "", "Erstellt einen Auftrag mit übergebenen Artikeln", "'bestellen Max'" );
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n", "readScript", "Dateipfad(txt)", "", "Liest eine Textdatei mit Befehlen ein und führt diese aus.", "'readScript C:\\Users\\Max\\Desktop\\script.txt'" );
+		System.out.printf("%-20s%-30s%-40s%-60s%-40s%n%n", "quit", "", "", "Beendet das Programm, oder einen Unterprozess.", " Wenn im Tutorial: quit --> zurück zu Befehlen" );
 
 		System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 	}

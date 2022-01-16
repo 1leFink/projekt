@@ -85,7 +85,15 @@ public class Artikel implements Serializable{
 		return new Comparator<Artikel>() {
 			@Override
 			public int compare(Artikel k1,Artikel k2) {
-				return (int) (k1.preis - k2.preis);
+				if(k1.getPreis() < k2.getPreis()) {
+					return -1;
+				}
+				else if(k1.getPreis() > k2.getPreis()){
+					return 1;
+				}
+				else{
+					return 0;
+				}
 			}
 		};
 	}

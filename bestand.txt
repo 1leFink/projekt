@@ -1,4 +1,7 @@
 2|Banane|0.99|20|Lebensmittel
 4|Apfel|0.49|100|Lebensmittel
 5|Klopapier|3.99|30|Haushalt
-6|Cola|0.79|220|Getränke
+6|Cola|0.79|220|Getraenke
+12|Fanta|0.99|120|Getraenke
+7|Erdnussbutter|2.99|45|Lebensmittel
+
